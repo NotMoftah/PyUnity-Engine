@@ -13,7 +13,7 @@ def Render():
 
 def Update():
     if Input.KeyDown('z'):
-        transform.rotation.z += 10
+        transform.rotation.z += 5
 
     if Input.KeyDown('x'):
-        transform.rotation.x += 10
+        transform.rotation.x += 5
