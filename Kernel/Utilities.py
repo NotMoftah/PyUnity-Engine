@@ -154,7 +154,7 @@ class Transform2D:
         """
 
         ang = math.radians(self.rotation.z)
-        return Vector3(math.sin(ang), math.cos(ang), 0)
+        return Vector3(-math.sin(ang), math.cos(ang), 0)
 
     def right(self):
         """
@@ -168,6 +168,9 @@ class Transform2D:
 
 class SpriteRenderer:
     def __init__(self, sprite_name):
+        """
+        :param sprite_name: the name of the sprite
+        """
         drawings_path = os.path.dirname(Drawings.__file__)
         self.sprite_path = drawings_path + '\\' + sprite_name
 
@@ -178,15 +181,20 @@ class SpriteRenderer:
         self.sprite_data = pygame.image.tostring(self.sprite, "RGBA", 1)
         self.sprite_text_id = glGenTextures(1)
 
-    def render(self,):
-        glEnable(GL_TEXTURE_2D)
-        glEnable(GL_ALPHA_TEST)
-        glAlphaFunc(GL_GREATER, 0.1)
-
         glBindTexture(GL_TEXTURE_2D, self.sprite_text_id)
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR)
         glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, self.sprite_width, self.sprite_height, 0,
                      GL_RGBA, GL_UNSIGNED_BYTE, self.sprite_data)
+
+    def render(self,):
+
+        """
+            render the sprite at the origin.
+        """
+
+        glEnable(GL_TEXTURE_2D)
+
+        glBindTexture(GL_TEXTURE_2D, self.sprite_text_id)
 
         rx = self.sprite_width / 200
         ry = self.sprite_height / 200

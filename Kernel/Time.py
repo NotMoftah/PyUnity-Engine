@@ -39,10 +39,10 @@ def __Clamp(value, min_val, max_val):
     """
     :return: the float equals value if value in range(min, max), else min if value < min, otherwise max.
     """
-    if value < min_val:
+    if value <= min_val:
         return min_val
 
-    if value > max_val:
+    if value >= max_val:
         return max_val
 
     return value
