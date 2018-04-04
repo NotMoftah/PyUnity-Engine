@@ -9,9 +9,11 @@
     -- Author : AbdElAziz Mofath
     -- Date: 4th of April 2018 at 7:40 PM
 """
-
+import os
 import math
+import pygame
 from OpenGL.GL import *
+from UserAssets import Drawings
 
 
 class Vector3:
@@ -162,3 +164,47 @@ class Transform2D:
 
         ang = math.radians(self.rotation.z)
         return Vector3(math.cos(ang), -math.sin(ang), 0)
+
+
+class SpriteRenderer:
+    def __init__(self, sprite_name):
+        drawings_path = os.path.dirname(Drawings.__file__)
+        self.sprite_path = drawings_path + '\\' + sprite_name
+
+        self.sprite = pygame.image.load(self.sprite_path)
+        self.sprite_width = self.sprite.get_width()
+        self.sprite_height = self.sprite.get_height()
+
+        self.sprite_data = pygame.image.tostring(self.sprite, "RGBA", 1)
+        self.sprite_text_id = glGenTextures(1)
+
+    def render(self,):
+        glEnable(GL_TEXTURE_2D)
+        glEnable(GL_ALPHA_TEST)
+        glAlphaFunc(GL_GREATER, 0.1)
+
+        glBindTexture(GL_TEXTURE_2D, self.sprite_text_id)
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR)
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, self.sprite_width, self.sprite_height, 0,
+                     GL_RGBA, GL_UNSIGNED_BYTE, self.sprite_data)
+
+        rx = self.sprite_width / 200
+        ry = self.sprite_height / 200
+
+        glColor3f(1, 1, 1)
+
+        glBegin(GL_QUADS)
+        glTexCoord2f(0, 0)
+        glVertex3f(-1 * rx, -1 * ry, 0)
+
+        glTexCoord2f(0, 1)
+        glVertex3f(-1 * rx, 1 * ry, 0)
+
+        glTexCoord2f(1, 1)
+        glVertex3f(1 * rx, 1 * ry, 0)
+
+        glTexCoord2f(1, 0)
+        glVertex3f(1 * rx, -1 * ry, 0)
+        glEnd()
+
+        glDisable(GL_TEXTURE_2D)

@@ -6,9 +6,8 @@
 """
 
 import UserAssets.Scripts
-from os import listdir
 import OpenGL.GL
-import os.path
+import os
 
 __world_id_counter = 1000
 __script_module = {}
@@ -21,7 +20,7 @@ __late_update = {}
 
 def loadScripts():
     scriptsPath = os.path.dirname(UserAssets.Scripts.__file__)
-    scripts = listdir(scriptsPath)
+    scripts = os.listdir(scriptsPath)
 
     for script in scripts:
         if script[:2] == 's_':

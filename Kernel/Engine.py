@@ -5,7 +5,7 @@
     -- Date: 4th of April 2018 at 7:00 PM
 """
 
-
+import pygame
 from OpenGL.GL import *
 from OpenGL.GLUT import *
 from Kernel import Time, Input, Camera, EventManager
@@ -26,12 +26,12 @@ def __init():
         Typical OpenGL init function
     """
     glutInit()
+    pygame.init()
     glutInitWindowSize(500, 500)
     glutCreateWindow(b'Game Engine')
-    glutInitDisplayMode(GLUT_DEPTH | GLUT_WINDOW_DOUBLEBUFFER)
+    glutInitDisplayMode(GLUT_RGBA | GLUT_DEPTH | GLUT_WINDOW_DOUBLEBUFFER)
 
     glEnable(GL_DEPTH_TEST)
-    glEnable(GL_TEXTURE_2D)
 
     # Gl Functions
     glutSetCursor(1)
@@ -72,8 +72,7 @@ def __FrameUpdate():
 def __RenderUpdate():
     glLoadIdentity()
 
-    glClearColor(Camera.clearColor.x, Camera.clearColor.y,
-                 Camera.clearColor.z, 1.)
+    glClearColor(Camera.clearColor.x, Camera.clearColor.y, Camera.clearColor.z, .0)
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
 
     screenRatio = glutGet(GLUT_WINDOW_WIDTH) / glutGet(GLUT_WINDOW_HEIGHT)
