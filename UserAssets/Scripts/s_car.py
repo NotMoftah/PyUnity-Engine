@@ -1,6 +1,5 @@
 from UserAssets.Scripts.basics import *
 
-
 sprite = SpriteRenderer('car.png')
 transform = Transform2D()
 
@@ -12,12 +11,13 @@ def Render():
     transform.applyTransformation()
 
     # your render code here
-
     sprite.render()
+
 
 def Update():
     transform.scale = Vector3(0.25, 0.25, 0.25)
-    transform.position.z = -2
+    # transform.scale = Vector3(2, 2, 2)
+    transform.position.z = -1
 
     if Input.KeyHold('w'):
         transform.position += transform.up() * Time.deltaTime * 5

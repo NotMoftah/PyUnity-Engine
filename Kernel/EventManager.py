@@ -16,6 +16,7 @@ __start = {}
 __render = {}
 __update = {}
 __late_update = {}
+__dead_scripts = []
 
 
 def loadScripts():
@@ -72,8 +73,6 @@ def __EnableScript(script_id):
     subscribeRender(script_id, hasattr(__script_module[script_id], 'Render'))
     subscribeLateUpdate(script_id, hasattr(__script_module[script_id], 'LateUpdate'))
 
-    print('DONE')
-
 
 def __SendMeggage(script_id, method_name, *args):
     global __script_module
@@ -81,7 +80,17 @@ def __SendMeggage(script_id, method_name, *args):
     if script_id in __script_module:
         if hasattr(__script_module[script_id], method_name):
             method = getattr(__script_module[script_id], method_name)
-            method(args)
+            if len(args) > 0:
+                method(*args)
+            else:
+                method()
+
+
+def __DestroyScript(script_id):
+    global __dead_scripts
+
+    if not (script_id in __dead_scripts):
+        __dead_scripts.append(script_id)
 
 
 def subscribeStart(current_id, status):
@@ -110,12 +119,21 @@ def castStart():
 
 def castRender():
     global __script_module, __render
+    # first we sort the objects based on the distance from the camera.
+    list_of_rendering = [__script_module[x] for x in __script_module if __render[x]]
 
-    for subscriber in __script_module:
-        if __render[subscriber]:
-            OpenGL.GL.glPushMatrix()
-            __script_module[subscriber].Render()
-            OpenGL.GL.glPopMatrix()
+    def sortingKey(gameObject):
+        if hasattr(gameObject, 'transform') is True:
+            return gameObject.transform.position.z
+        return 0
+
+    list_of_rendering.sort(key=sortingKey, reverse=True)
+
+    # then we render
+    for obj in list_of_rendering:
+        OpenGL.GL.glPushMatrix()
+        obj.Render()
+        OpenGL.GL.glPopMatrix()
 
 
 def castUpdate():
@@ -132,3 +150,22 @@ def castLateUpdate():
     for subscriber in __script_module:
         if __late_update[subscriber]:
             __script_module[subscriber].LateUpdate()
+
+
+def collectGarbage():
+    global __dead_scripts, __start, __render, __update, __late_update
+    if len(__dead_scripts) > 0:
+        for obj in __dead_scripts:
+            del __dead_scripts[obj]
+
+            if obj in __start:
+                del __start[obj]
+
+            if obj in __render:
+                del __render[obj]
+
+            if obj in __update:
+                del __update[obj]
+
+            if obj in __late_update:
+                del __late_update[obj]

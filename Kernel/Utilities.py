@@ -14,6 +14,7 @@ import math
 import pygame
 from OpenGL.GL import *
 from UserAssets import Drawings
+from Kernel.EventManager import __EnableScript, __DisableScript, __DestroyScript, __SendMeggage
 
 
 class Vector3:
@@ -163,7 +164,7 @@ class Transform2D:
         """
 
         ang = math.radians(self.rotation.z)
-        return Vector3(math.cos(ang), -math.sin(ang), 0)
+        return Vector3(math.cos(ang), math.sin(ang), 0)
 
 
 class SpriteRenderer:
@@ -216,3 +217,19 @@ class SpriteRenderer:
         glEnd()
 
         glDisable(GL_TEXTURE_2D)
+
+
+def send_message(script_id, method, *args):
+    __SendMeggage(script_id, method, *args)
+
+
+def enable_script(script_id):
+    __EnableScript(script_id)
+
+
+def disable_script(script_id):
+    __DisableScript(script_id)
+
+
+def destroy_script(script_id):
+    __DestroyScript(script_id)

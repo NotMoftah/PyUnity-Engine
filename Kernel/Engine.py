@@ -11,7 +11,7 @@ from OpenGL.GLUT import *
 from Kernel import Time, Input, Camera, EventManager
 
 
-def start(scripts='defult'):
+def start():
     """
         Start the engine hence the game.
     """
@@ -31,9 +31,8 @@ def __init():
     glutCreateWindow(b'Game Engine')
     glutInitDisplayMode(GLUT_RGBA | GLUT_DEPTH | GLUT_WINDOW_DOUBLEBUFFER)
 
-    glEnable(GL_DEPTH_TEST)
-    glEnable(GL_ALPHA_TEST)
-    glAlphaFunc(GL_GREATER, 0.1)
+    glEnable(GL_BLEND)
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA)
 
     # Gl Functions
     glutSetCursor(1)
@@ -60,6 +59,7 @@ def __GameLoopManager():
     __PhysicsUpdate()
     __LateFrameUpdate()
 
+    EventManager.collectGarbage()
     Time.__SleepTimeToLockFramsOn(60)
 
 
