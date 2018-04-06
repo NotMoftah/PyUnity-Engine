@@ -1,9 +1,9 @@
 from UserAssets.Scripts.basics import *
 
 sprite = SpriteRenderer('car.png')
-transform = Transform2D()
+glow = SpriteRenderer('glow.png')
 
-Camera.clearColor = Vector3(0.5, 0.5, 0.5)
+transform = Transform2D()
 
 
 def Render():
@@ -13,20 +13,28 @@ def Render():
     # your render code here
     sprite.render()
 
+    glTranslate(0, 20, 0)
+    glScale(10, 10, 10)
+
+    glow.render()
+
 
 def Update():
     transform.scale = Vector3(0.25, 0.25, 0.25)
-    # transform.scale = Vector3(2, 2, 2)
     transform.position.z = -1
 
     if Input.KeyHold('w'):
-        transform.position += transform.up() * Time.deltaTime * 5
+        transform.position += Vector3(0, 1, 0) * Time.deltaTime * 4
 
     if Input.KeyHold('s'):
-        transform.position -= transform.up() * Time.deltaTime * 5
+        transform.position -= Vector3(0, 1, 0) * Time.deltaTime * 4
 
     if Input.KeyHold('d'):
-        transform.rotation.z -= 180 * Time.deltaTime
+        transform.position += Vector3(1, 0, 0) * Time.deltaTime * 4
 
     if Input.KeyHold('a'):
-        transform.rotation.z += 180 * Time.deltaTime
+        transform.position -= Vector3(1, 0, 0) * Time.deltaTime * 4
+
+    transform.lookAtPoint(Camera.screenToWorld(Input.MousePosition()))
+    Camera.position = transform.position
+

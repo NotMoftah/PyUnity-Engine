@@ -60,6 +60,7 @@ def __GameLoopManager():
     __LateFrameUpdate()
 
     EventManager.collectGarbage()
+    EventManager.updateDictionary()
     Time.__SleepTimeToLockFramsOn(60)
 
 
@@ -84,7 +85,7 @@ def __RenderUpdate():
             -Camera.size * screenHeightRatio, Camera.size * screenHeightRatio,
             Camera.near, -Camera.far)
 
-    Camera.applyTransformation()
+    Camera.applyTransformation(screenWidthRatio, screenHeightRatio)
     EventManager.castRender()
     glutSwapBuffers()
 

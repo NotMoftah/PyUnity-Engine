@@ -16,6 +16,8 @@ __start = {}
 __render = {}
 __update = {}
 __late_update = {}
+
+__born_scripts = []
 __dead_scripts = []
 
 
@@ -93,6 +95,11 @@ def __DestroyScript(script_id):
         __dead_scripts.append(script_id)
 
 
+def __InstantiateScript(prefab_name):
+    global __born_scripts
+    __born_scripts.append(prefab_name)
+
+
 def subscribeStart(current_id, status):
     __start[current_id] = status
 
@@ -153,10 +160,9 @@ def castLateUpdate():
 
 
 def collectGarbage():
-    global __dead_scripts, __start, __render, __update, __late_update
+    global __dead_scripts, __start, __render, __update, __late_update, __script_module
     if len(__dead_scripts) > 0:
         for obj in __dead_scripts:
-            del __dead_scripts[obj]
 
             if obj in __start:
                 del __start[obj]
@@ -169,3 +175,41 @@ def collectGarbage():
 
             if obj in __late_update:
                 del __late_update[obj]
+
+            if obj in __script_module:
+                del __script_module[obj]
+
+        __dead_scripts = []
+
+
+def __HookPrefab(script):
+    global __world_id_counter, __script_module
+    __world_id_counter = __world_id_counter + 1
+
+    ObjectModule = __import__(script, globals(), locals(), ['*'])
+
+    setattr(ObjectModule, '__id__', __world_id_counter)
+
+    current_id = __world_id_counter
+
+    __script_module[current_id] = ObjectModule
+
+    subscribeStart(current_id, hasattr(ObjectModule, 'Start'))
+    subscribeUpdate(current_id, hasattr(ObjectModule, 'Update'))
+    subscribeRender(current_id, hasattr(ObjectModule, 'Render'))
+    subscribeLateUpdate(current_id, hasattr(ObjectModule, 'LateUpdate'))
+
+    return ObjectModule
+
+
+def updateDictionary():
+    global __born_scripts
+
+    if len(__born_scripts) > 0:
+        for prefab_name in __born_scripts:
+            obj = __HookPrefab('UserAssets.Prefabs.' + prefab_name)
+
+            if hasattr(obj, 'Start'):
+                obj.Start()
+
+    __born_scripts = []

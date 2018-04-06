@@ -4,6 +4,7 @@
     -- Author : AbdElAziz Mofath
     -- Date: 4th of April 2018 at 10:00 PM
 """
+from Kernel.Utilities import Vector3
 
 __mouse_x, __mouse_y = 0, 0
 __window_width, __window_height = 1, 1
@@ -160,5 +161,4 @@ def MousePosition():
     """
     :return: the position of the mouse referenced to the drawing window in range (-1, 1) in both x, y.
     """
-
-    return __mouse_x, __mouse_y
+    return Vector3(__mouse_x, __mouse_y, 0)

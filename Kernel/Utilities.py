@@ -14,7 +14,7 @@ import math
 import pygame
 from OpenGL.GL import *
 from UserAssets import Drawings
-from Kernel.EventManager import __EnableScript, __DisableScript, __DestroyScript, __SendMeggage
+from Kernel.EventManager import __EnableScript, __DisableScript, __DestroyScript, __SendMeggage, __InstantiateScript
 
 
 class Vector3:
@@ -166,6 +166,10 @@ class Transform2D:
         ang = math.radians(self.rotation.z)
         return Vector3(math.cos(ang), math.sin(ang), 0)
 
+    def lookAtPoint(self, vec):
+        direction = (vec - self.position).normalized()
+        self.rotation.z = math.degrees(math.atan2(direction.y, direction.x)) - 90
+
 
 class SpriteRenderer:
     def __init__(self, sprite_name):
@@ -187,7 +191,7 @@ class SpriteRenderer:
         glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, self.sprite_width, self.sprite_height, 0,
                      GL_RGBA, GL_UNSIGNED_BYTE, self.sprite_data)
 
-    def render(self,):
+    def render(self, mul=1, brightness=1):
 
         """
             render the sprite at the origin.
@@ -200,19 +204,19 @@ class SpriteRenderer:
         rx = self.sprite_width / 200
         ry = self.sprite_height / 200
 
-        glColor3f(1, 1, 1)
+        glColor3f(1 * brightness, 1 * brightness, 1 * brightness)
 
         glBegin(GL_QUADS)
         glTexCoord2f(0, 0)
         glVertex3f(-1 * rx, -1 * ry, 0)
 
-        glTexCoord2f(0, 1)
+        glTexCoord2f(0, mul)
         glVertex3f(-1 * rx, 1 * ry, 0)
 
-        glTexCoord2f(1, 1)
+        glTexCoord2f(mul, mul)
         glVertex3f(1 * rx, 1 * ry, 0)
 
-        glTexCoord2f(1, 0)
+        glTexCoord2f(mul, 0)
         glVertex3f(1 * rx, -1 * ry, 0)
         glEnd()
 
@@ -233,3 +237,8 @@ def disable_script(script_id):
 
 def destroy_script(script_id):
     __DestroyScript(script_id)
+
+
+def instantiate_script(script_name):
+    __InstantiateScript(script_name)
+
