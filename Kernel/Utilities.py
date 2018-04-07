@@ -12,9 +12,12 @@
 import os
 import math
 import pygame
+import random
 from OpenGL.GL import *
+from Kernel import Time
 from UserAssets import Drawings
-from Kernel.EventManager import __EnableScript, __DisableScript, __DestroyScript, __SendMeggage, __InstantiateScript
+from Kernel.EventManager import __EnableScript, __DisableScript, __DestroyScript,\
+    __SendMeggage, __InstantiateScript, __GetScript
 
 
 class Vector3:
@@ -201,8 +204,8 @@ class SpriteRenderer:
 
         glBindTexture(GL_TEXTURE_2D, self.sprite_text_id)
 
-        rx = self.sprite_width / 200
-        ry = self.sprite_height / 200
+        rx = self.sprite_width / 100
+        ry = self.sprite_height / 100
 
         glColor3f(1 * brightness, 1 * brightness, 1 * brightness)
 
@@ -221,6 +224,104 @@ class SpriteRenderer:
         glEnd()
 
         glDisable(GL_TEXTURE_2D)
+
+
+class Animation:
+    def __init__(self, sprite_name, size, speed):
+        """
+        :param sprite_name: the name of the sprite
+        """
+        self.size, self.speed = size, speed
+        self.frame_counter, self.start = 0, 0
+        drawings_path = os.path.dirname(Drawings.__file__)
+        self.sprite_path = drawings_path + '\\' + sprite_name
+
+        self.sprite = pygame.image.load(self.sprite_path)
+        self.sprite_width = self.sprite.get_width()
+        self.sprite_height = self.sprite.get_height()
+
+        self.sprite_data = pygame.image.tostring(self.sprite, "RGBA", 1)
+        self.sprite_text_id = glGenTextures(1)
+
+        glBindTexture(GL_TEXTURE_2D, self.sprite_text_id)
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR)
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, self.sprite_width, self.sprite_height, 0,
+                     GL_RGBA, GL_UNSIGNED_BYTE, self.sprite_data)
+
+    def __frame_bounds(self, animate):
+        step = 1 / self.size
+
+        if animate:
+            self.frame_counter += self.speed * Time.deltaTime
+            if self.frame_counter >= step:
+                self.start += step * int(self.frame_counter / step)
+                self.frame_counter = 0
+
+            return self.start, self.start + step
+
+        return 0, step
+
+    def render(self, animate=True, brightness=1):
+
+        """
+            render the sprite at the origin.
+        """
+
+        glEnable(GL_TEXTURE_2D)
+
+        glBindTexture(GL_TEXTURE_2D, self.sprite_text_id)
+
+        rx = self.sprite_width / (100 * self.size)
+        ry = self.sprite_height / 100
+        tx, ty = self.__frame_bounds(animate)
+
+        glColor3f(1 * brightness, 1 * brightness, 1 * brightness)
+
+        glBegin(GL_QUADS)
+        glTexCoord2f(tx, 0)
+        glVertex3f(-rx, -ry, 0)
+
+        glTexCoord2f(ty, 0)
+        glVertex3f(rx, -ry, 0)
+
+        glTexCoord2f(ty, 1)
+        glVertex3f(rx, ry, 0)
+
+        glTexCoord2f(tx, 1)
+        glVertex3f(-rx, ry, 0)
+        glEnd()
+
+        glDisable(GL_TEXTURE_2D)
+
+
+class ParticleSystem:
+    def __init__(self, sprite_name, num):
+        drawings_path = os.path.dirname(Drawings.__file__)
+        self.sprite_path = drawings_path + '\\' + sprite_name
+
+        self.sprite = pygame.image.load(self.sprite_path)
+        self.sprite_width = self.sprite.get_width()
+        self.sprite_height = self.sprite.get_height()
+
+        self.sprite_data = pygame.image.tostring(self.sprite, "RGBA", 1)
+        self.sprite_text_id = glGenTextures(1)
+
+        glBindTexture(GL_TEXTURE_2D, self.sprite_text_id)
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR)
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, self.sprite_width, self.sprite_height, 0,
+                     GL_RGBA, GL_UNSIGNED_BYTE, self.sprite_data)
+
+        self.alive = False
+
+        self.speed_list = [random.random() for _ in range(num)]
+        self.pos_list = [(0, 0) for _ in range(num)]
+
+    def activate(self):
+        self.alive = True
+
+    def render(self):
+        if self.alive is True:
+            pass
 
 
 def send_message(script_id, method, *args):
@@ -242,3 +343,6 @@ def destroy_script(script_id):
 def instantiate_script(script_name):
     __InstantiateScript(script_name)
 
+
+def get_script(script_id):
+    return __GetScript(script_id)

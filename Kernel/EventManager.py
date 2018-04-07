@@ -100,6 +100,13 @@ def __InstantiateScript(prefab_name):
     __born_scripts.append(prefab_name)
 
 
+def __GetScript(script_id):
+    global __script_module
+    if script_id in __script_module:
+        return __script_module[script_id]
+    return None
+
+
 def subscribeStart(current_id, status):
     __start[current_id] = status
 

@@ -1,9 +1,15 @@
 from UserAssets.Scripts.basics import *
 
-sprite = SpriteRenderer('car.png')
-glow = SpriteRenderer('glow.png')
-
+car1 = Animation('player.png', 27, 2)
 transform = Transform2D()
+
+speed = Vector3(0, 0, 0)
+animate = False
+
+
+def Start():
+    transform.scale = Vector3(2, 2, 2)
+    transform.position.z = -1
 
 
 def Render():
@@ -11,30 +17,30 @@ def Render():
     transform.applyTransformation()
 
     # your render code here
-    sprite.render()
-
-    glTranslate(0, 20, 0)
-    glScale(10, 10, 10)
-
-    glow.render()
+    car1.render(animate=animate)
 
 
 def Update():
-    transform.scale = Vector3(0.25, 0.25, 0.25)
-    transform.position.z = -1
+    global speed, animate
 
-    if Input.KeyHold('w'):
-        transform.position += Vector3(0, 1, 0) * Time.deltaTime * 4
-
-    if Input.KeyHold('s'):
-        transform.position -= Vector3(0, 1, 0) * Time.deltaTime * 4
+    animate = False
 
     if Input.KeyHold('d'):
-        transform.position += Vector3(1, 0, 0) * Time.deltaTime * 4
+        transform.position += transform.right() * Time.deltaTime * 5
+        transform.scale.x = +2
+        animate = True
 
     if Input.KeyHold('a'):
-        transform.position -= Vector3(1, 0, 0) * Time.deltaTime * 4
+        transform.position -= transform.right() * Time.deltaTime * 5
+        transform.scale.x = -2
+        animate = True
 
-    transform.lookAtPoint(Camera.screenToWorld(Input.MousePosition()))
-    Camera.position = transform.position
+    if Input.KeyHold(' '):
+        speed = Vector3(0, 10, 0)
 
+    transform.position += speed * Time.deltaTime
+
+    if transform.position.y <= -1:
+        speed = Vector3(0, 0, 0)
+    else:
+        speed += Vector3(0, -1, 0) * 30 * Time.deltaTime

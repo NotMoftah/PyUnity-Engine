@@ -7,10 +7,14 @@ transform0 = Transform2D()
 transform0.scale = Vector3(5, 5, 5)
 
 
+# def Start():
+#     disable_script(__id__)
+
+
 def Render():
     transform0.applyTransformation()
 
-    maze.render(mul=7, brightness=.5)
+    maze.render(mul=5, brightness=.7)
 
 
 def Update():
