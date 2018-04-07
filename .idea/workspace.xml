@@ -2,8 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cd9934a8-35e4-46ec-9f89-0e9987d875b5" name="Default" comment="Scripts now are being rendering based on their z position.&#10;GL_DEPTH_TEST is now disabled. no need.&#10;Scripts can now be Enabled, Disabled and Destroyed.&#10;Send messages between scripts is now working.">
-      <change afterPath="$PROJECT_DIR$/UserAssets/Drawings/player.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/UserAssets/Drawings/player2.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Delta Game Engine/.idea/Delta Game Engine.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../Delta Game Engine/.idea/Delta Game Engine.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Delta Game Engine/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Delta Game Engine/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Delta Game Engine/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Delta Game Engine/.idea/vcs.xml" afterDir="false" />
@@ -20,12 +18,6 @@
       <change beforePath="$PROJECT_DIR$/../Delta Game Engine/UserAssets/Scripts/s_test2.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../Delta Game Engine/UserAssets/Scripts/s_test3.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../Delta Game Engine/UserAssets/Scripts/s_test4.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Kernel/EventManager.py" beforeDir="false" afterPath="$PROJECT_DIR$/Kernel/EventManager.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Kernel/Utilities.py" beforeDir="false" afterPath="$PROJECT_DIR$/Kernel/Utilities.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UserAssets/Drawings/glow.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/UserAssets/Scripts/s_car.py" beforeDir="false" afterPath="$PROJECT_DIR$/UserAssets/Scripts/s_car.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UserAssets/Scripts/s_map.py" beforeDir="false" afterPath="$PROJECT_DIR$/UserAssets/Scripts/s_map.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -41,9 +33,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="753">
               <caret line="45" column="39" selection-start-line="45" selection-start-column="39" selection-end-line="45" selection-end-column="39" />
-              <folding>
-                <element signature="e#126#190#0" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -152,22 +141,6 @@
             <path>
               <item name="GoEngine" type="b2602c69:ProjectViewProjectNode" />
               <item name="GoEngine" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="GoEngine" type="b2602c69:ProjectViewProjectNode" />
-              <item name="GoEngine" type="462c0819:PsiDirectoryNode" />
-              <item name="Kernel" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="GoEngine" type="b2602c69:ProjectViewProjectNode" />
-              <item name="GoEngine" type="462c0819:PsiDirectoryNode" />
-              <item name="UserAssets" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="GoEngine" type="b2602c69:ProjectViewProjectNode" />
-              <item name="GoEngine" type="462c0819:PsiDirectoryNode" />
-              <item name="UserAssets" type="462c0819:PsiDirectoryNode" />
-              <item name="Scripts" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -448,14 +421,20 @@
       <option name="project" value="LOCAL" />
       <updated>1523005058552</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Animation is added and it's fully working just fine.">
+      <created>1523065829426</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1523065829426</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.1546875" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.1546875" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" weight="0.32943678" />
       <window_info anchor="bottom" id="Version Control" order="9" />
@@ -483,7 +462,8 @@
     <MESSAGE value="Fix sprite rendering performance." />
     <MESSAGE value="Scripts now are being rendering based on their z position.&#10;GL_DEPTH_TEST is now disabled. no need.&#10;Scripts can now be Enabled, Disabled and Destroyed.&#10;Send messages between scripts is now working." />
     <MESSAGE value="A new function for the transform is added =&gt; LookAtPoint. where is force the object to rotation itself to face the new point.&#10;&#10;Also, ScreenToWorld at the camera class. where this function translate the position of the mouse from the screen coord (-1, 1) into the world coord whatever it is.&#10;&#10;Also fixed few bugs and added another ones to fix later :)." />
-    <option name="LAST_COMMIT_MESSAGE" value="A new function for the transform is added =&gt; LookAtPoint. where is force the object to rotation itself to face the new point.&#10;&#10;Also, ScreenToWorld at the camera class. where this function translate the position of the mouse from the screen coord (-1, 1) into the world coord whatever it is.&#10;&#10;Also fixed few bugs and added another ones to fix later :)." />
+    <MESSAGE value="Animation is added and it's fully working just fine." />
+    <option name="LAST_COMMIT_MESSAGE" value="Animation is added and it's fully working just fine." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -493,11 +473,15 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/UserAssets/Scripts/s_car.py">
       <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="900">
+          <caret line="45" column="39" selection-start-line="45" selection-start-column="39" selection-end-line="45" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/UserAssets/Scripts/s_car.py">
+      <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="160">
           <caret line="8" selection-start-line="8" selection-end-line="8" />
-          <folding>
-            <element signature="e#126#190#0" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -760,9 +744,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="753">
           <caret line="45" column="39" selection-start-line="45" selection-start-column="39" selection-end-line="45" selection-end-column="39" />
-          <folding>
-            <element signature="e#126#190#0" />
-          </folding>
         </state>
       </provider>
     </entry>
