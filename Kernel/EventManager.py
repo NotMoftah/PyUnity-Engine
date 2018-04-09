@@ -7,7 +7,9 @@
 
 import UserAssets.Scripts
 import importlib.util
+import Kernel.Time
 import OpenGL.GL
+import gc
 import os
 
 __world_id_counter = 1000
@@ -20,6 +22,8 @@ __late_update = {}
 
 __born_scripts = []
 __dead_scripts = []
+
+gc_time = 0.0
 
 
 def loadScripts():
@@ -174,7 +178,7 @@ def castLateUpdate():
 
 
 def collectGarbage():
-    global __dead_scripts, __start, __render, __update, __late_update, __script_module
+    global __dead_scripts, __start, __render, __update, __late_update, __script_module, gc_time
     if len(__dead_scripts) > 0:
         for obj in __dead_scripts:
 
@@ -194,6 +198,10 @@ def collectGarbage():
                 del __script_module[obj]
 
         __dead_scripts = []
+
+    if Kernel.Time.fixedTime >= gc_time + 1:
+        gc_time = Kernel.Time.fixedTime
+        gc.collect()
 
 
 def __LoadPrefab(prefab):

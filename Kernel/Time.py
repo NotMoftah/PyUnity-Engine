@@ -8,7 +8,9 @@
 import time
 
 deltaTime = 0.0
+fixedTime = 0.0
 __previousTime = time.time()
+__startTime = time.time()
 
 
 def __UpdateDeltaTime():
@@ -16,9 +18,10 @@ def __UpdateDeltaTime():
         Update the timing of the game.
         * Call every frame
     """
-    global deltaTime, __previousTime
+    global deltaTime, __previousTime, fixedTime
 
     deltaTime = __Clamp(time.time() - __previousTime, 0.0001, 10)
+    fixedTime = time.time() - __startTime
     __previousTime = time.time()
 
 

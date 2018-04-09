@@ -2,11 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cd9934a8-35e4-46ec-9f89-0e9987d875b5" name="Default" comment="Scripts now are being rendering based on their z position.&#10;GL_DEPTH_TEST is now disabled. no need.&#10;Scripts can now be Enabled, Disabled and Destroyed.&#10;Send messages between scripts is now working.">
-      <change afterPath="$PROJECT_DIR$/Kernel/CollisionDetector.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/UserAssets/Drawings/light2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/UserAssets/Prefabs/s_car.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/UserAssets/Scripts/s_lighting.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/UserAssets/Scripts/s_player.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/UserAssets/Drawings/fire.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/UserAssets/Drawings/toto.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Delta Game Engine/.idea/Delta Game Engine.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../Delta Game Engine/.idea/Delta Game Engine.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Delta Game Engine/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Delta Game Engine/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Delta Game Engine/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Delta Game Engine/.idea/vcs.xml" afterDir="false" />
@@ -23,14 +20,15 @@
       <change beforePath="$PROJECT_DIR$/../Delta Game Engine/UserAssets/Scripts/s_test2.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../Delta Game Engine/UserAssets/Scripts/s_test3.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../Delta Game Engine/UserAssets/Scripts/s_test4.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/GoEngine.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/GoEngine.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dictionaries/AbdEl_Aziz.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dictionaries/AbdEl_Aziz.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Kernel/EventManager.py" beforeDir="false" afterPath="$PROJECT_DIR$/Kernel/EventManager.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kernel/Time.py" beforeDir="false" afterPath="$PROJECT_DIR$/Kernel/Time.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Kernel/Utilities.py" beforeDir="false" afterPath="$PROJECT_DIR$/Kernel/Utilities.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UserAssets/Prefabs/s_car.py" beforeDir="false" afterPath="$PROJECT_DIR$/UserAssets/Prefabs/fire.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UserAssets/Scripts/basics.py" beforeDir="false" afterPath="$PROJECT_DIR$/UserAssets/Scripts/basics.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/UserAssets/Scripts/s_car.py" beforeDir="false" afterPath="$PROJECT_DIR$/UserAssets/Scripts/s_car.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UserAssets/Scripts/s_map.py" beforeDir="false" afterPath="$PROJECT_DIR$/UserAssets/Scripts/s_map.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UserAssets/Scripts/s_lighting.py" beforeDir="false" afterPath="$PROJECT_DIR$/UserAssets/Scripts/s_lighting.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UserAssets/Scripts/s_player.py" beforeDir="false" afterPath="$PROJECT_DIR$/UserAssets/Scripts/s_player.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -44,8 +42,8 @@
       <file leaf-file-name="EventManager.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Kernel/EventManager.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="328">
-              <caret line="109" column="27" lean-forward="true" selection-start-line="109" selection-start-column="27" selection-end-line="109" selection-end-column="27" />
+            <state relative-caret-position="233">
+              <caret line="198" lean-forward="true" selection-start-line="198" selection-end-line="198" />
               <folding>
                 <element signature="e#117#142#0" expanded="true" />
               </folding>
@@ -68,6 +66,7 @@
       <find>pressed down</find>
       <find>shm</find>
       <find>self.</find>
+      <find>prefabs</find>
     </findStrings>
     <replaceStrings>
       <replace>__window_height</replace>
@@ -87,9 +86,7 @@
         <option value="$PROJECT_DIR$/../Delta Game Engine/DeltaCore/Kernel/Input.py" />
         <option value="$PROJECT_DIR$/UserAssets/Scripts/s_cube.py" />
         <option value="$PROJECT_DIR$/UserAssets/Scripts/s_chape.py" />
-        <option value="$PROJECT_DIR$/Kernel/Time.py" />
         <option value="$PROJECT_DIR$/UserAssets/123.py" />
-        <option value="$PROJECT_DIR$/UserAssets/Scripts/basics.py" />
         <option value="$PROJECT_DIR$/testing/alpha.py" />
         <option value="$PROJECT_DIR$/UserAssets/Scripts/s_zzz.py" />
         <option value="$PROJECT_DIR$/Kernel/Input.py" />
@@ -107,11 +104,14 @@
         <option value="$PROJECT_DIR$/../PyGorithm/Testing/test_quadtrees.py" />
         <option value="$PROJECT_DIR$/../PyGorithm/Trees/Quadtrees.py" />
         <option value="$PROJECT_DIR$/Kernel/CollisionDetector.py" />
-        <option value="$PROJECT_DIR$/UserAssets/Scripts/s_car.py" />
-        <option value="$PROJECT_DIR$/UserAssets/Scripts/s_player.py" />
-        <option value="$PROJECT_DIR$/Kernel/Utilities.py" />
-        <option value="$PROJECT_DIR$/UserAssets/Scripts/s_lighting.py" />
         <option value="$PROJECT_DIR$/UserAssets/Prefabs/s_car.py" />
+        <option value="$PROJECT_DIR$/UserAssets/Scripts/s_lighting.py" />
+        <option value="$PROJECT_DIR$/UserAssets/Scripts/basics.py" />
+        <option value="$PROJECT_DIR$/Kernel/Utilities.py" />
+        <option value="$PROJECT_DIR$/UserAssets/Scripts/s_player.py" />
+        <option value="$PROJECT_DIR$/UserAssets/Scripts/s_car.py" />
+        <option value="$PROJECT_DIR$/Kernel/Time.py" />
+        <option value="$PROJECT_DIR$/UserAssets/Prefabs/fire.py" />
         <option value="$PROJECT_DIR$/Kernel/EventManager.py" />
       </list>
     </option>
@@ -173,11 +173,6 @@
               <item name="GoEngine" type="462c0819:PsiDirectoryNode" />
               <item name="Kernel" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="GoEngine" type="b2602c69:ProjectViewProjectNode" />
-              <item name="GoEngine" type="462c0819:PsiDirectoryNode" />
-              <item name="UserAssets" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
@@ -201,9 +196,9 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\AbdEl-Aziz\Documents\PycharmProjects\GoEngine\UserAssets\Drawings" />
       <recent name="C:\Users\AbdEl-Aziz\Documents\PycharmProjects\GoEngine\UserAssets\Prefabs" />
       <recent name="C:\Users\AbdEl-Aziz\Documents\PycharmProjects\GoEngine\UserAssets\Scripts" />
-      <recent name="C:\Users\AbdEl-Aziz\Documents\PycharmProjects\GoEngine\UserAssets\Drawings" />
       <recent name="C:\Users\AbdEl-Aziz\Documents\PycharmProjects\GoEngine\testing" />
       <recent name="C:\Users\AbdEl-Aziz\Documents\PycharmProjects\Delta Game Engine\UserAssets\Scripts" />
     </key>
@@ -467,7 +462,14 @@
       <option name="project" value="LOCAL" />
       <updated>1523065829426</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="instantiate_script fully works now.&#10;The old bug where you can only instantiate the script once it fixed.">
+      <created>1523267320885</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1523267320885</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -479,7 +481,7 @@
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" weight="0.32943678" />
       <window_info anchor="bottom" id="Version Control" order="9" />
       <window_info anchor="bottom" id="Python Console" order="7" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32412326" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.32412326" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Terminal" order="8" />
       <window_info id="Favorites" order="2" side_tool="true" />
@@ -503,7 +505,8 @@
     <MESSAGE value="Scripts now are being rendering based on their z position.&#10;GL_DEPTH_TEST is now disabled. no need.&#10;Scripts can now be Enabled, Disabled and Destroyed.&#10;Send messages between scripts is now working." />
     <MESSAGE value="A new function for the transform is added =&gt; LookAtPoint. where is force the object to rotation itself to face the new point.&#10;&#10;Also, ScreenToWorld at the camera class. where this function translate the position of the mouse from the screen coord (-1, 1) into the world coord whatever it is.&#10;&#10;Also fixed few bugs and added another ones to fix later :)." />
     <MESSAGE value="Animation is added and it's fully working just fine." />
-    <option name="LAST_COMMIT_MESSAGE" value="Animation is added and it's fully working just fine." />
+    <MESSAGE value="instantiate_script fully works now.&#10;The old bug where you can only instantiate the script once it fixed." />
+    <option name="LAST_COMMIT_MESSAGE" value="instantiate_script fully works now.&#10;The old bug where you can only instantiate the script once it fixed." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -511,14 +514,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/Kernel/CollisionDetector.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="100">
-          <caret line="5" selection-start-line="5" selection-end-line="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/UserAssets/Scripts/s_cube.py" />
     <entry file="file://$PROJECT_DIR$/Kernel/Utilities.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="540">
@@ -696,20 +691,6 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/testing.py" />
     <entry file="file://$PROJECT_DIR$/UserAssets/Scripts/s_kasem.py" />
-    <entry file="file://$PROJECT_DIR$/UserAssets/Scripts/basics.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="100">
-          <caret line="5" selection-start-line="5" selection-end-line="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Kernel/Time.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-9">
-          <caret line="23" lean-forward="true" selection-start-line="23" selection-end-line="23" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/UserAssets/Scripts/s_leboudy.py" />
     <entry file="file://$PROJECT_DIR$/UserAssets/Scripts/s_gyjgjhj.py" />
     <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36/Lib/site-packages/OpenGL/raw/GL/VERSION/GL_1_1.py">
@@ -734,6 +715,27 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/UserAssets/Scripts/s_lighting.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="17" lean-forward="true" selection-start-line="17" selection-end-line="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/UserAssets/Scripts/basics.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="40">
+          <caret line="2" column="11" selection-start-line="2" selection-start-column="11" selection-end-line="2" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Kernel/Engine.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1791">
+          <caret line="100" selection-start-line="100" selection-end-line="100" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Kernel/CollisionDetector.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="360">
@@ -741,58 +743,54 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/UserAssets/Scripts/s_car.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="140">
-          <caret line="7" selection-start-line="7" selection-end-line="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/UserAssets/Scripts/s_player.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="220">
-          <caret line="11" selection-start-line="11" selection-end-line="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Kernel/Engine.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="448">
-          <caret line="100" selection-start-line="100" selection-end-line="100" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/UserAssets/Prefabs/s_car.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="640">
-          <caret line="32" column="14" lean-forward="true" selection-start-line="32" selection-start-column="14" selection-end-line="32" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/UserAssets/Scripts/s_lighting.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="440">
-          <caret line="22" column="21" selection-start-line="22" selection-start-column="21" selection-end-line="22" selection-end-column="21" />
-          <folding>
-            <element signature="e#0#39#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Kernel/Utilities.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="391">
-          <caret line="356" column="11" selection-start-line="356" selection-start-column="11" selection-end-line="356" selection-end-column="11" />
+          <caret line="200" selection-start-line="198" selection-end-line="200" />
           <folding>
             <element signature="e#354#363#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/UserAssets/Scripts/s_player.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-100">
+          <caret line="10" column="13" lean-forward="true" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/UserAssets/Drawings/toto.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/UserAssets/Drawings/fire.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Kernel/Time.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="140">
+          <caret line="7" column="9" selection-start-line="7" selection-start-column="9" selection-end-line="7" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/UserAssets/Prefabs/fire.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="460">
+          <caret line="26" column="21" selection-start-line="26" selection-start-column="21" selection-end-line="26" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/UserAssets/Scripts/s_car.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="408">
+          <caret line="56" column="4" selection-start-line="56" selection-start-column="4" selection-end-line="56" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Kernel/EventManager.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="328">
-          <caret line="109" column="27" lean-forward="true" selection-start-line="109" selection-start-column="27" selection-end-line="109" selection-end-column="27" />
+        <state relative-caret-position="233">
+          <caret line="198" lean-forward="true" selection-start-line="198" selection-end-line="198" />
           <folding>
             <element signature="e#117#142#0" expanded="true" />
           </folding>

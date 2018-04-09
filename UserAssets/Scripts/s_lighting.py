@@ -15,9 +15,3 @@ def Render():
     glBlendFunc(GL_SRC_ALPHA, GL_ONE)
     light.render(brightness=.5)
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA)
-
-
-def Update():
-    if Input.KeyDown('z'):
-        car = instantiate_script('s_car')
-        car.set_speed(random.random() * 10)

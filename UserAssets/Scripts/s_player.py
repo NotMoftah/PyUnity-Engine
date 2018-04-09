@@ -1,16 +1,11 @@
 from UserAssets.Scripts.basics import *
 
-car1 = Animation('player.png', 27, 2)
+player = Animation('player.png', 27, 2)
 transform = Transform2D()
 
 speed = Vector3(0, 0, 0)
 __id__ = 'player'
-animate = False
-
-
-def Start():
-    transform.scale = Vector3(2, 2, 2)
-    transform.position.z = -1
+animate = True
 
 
 def Render():
@@ -18,7 +13,12 @@ def Render():
     transform.applyTransformation()
 
     # your render code here
-    car1.render(animate=animate)
+    player.render(animate=animate)
+
+
+def Start():
+    transform.scale = Vector3(2, 2, 2)
+    transform.position.z = -1
 
 
 def Update():

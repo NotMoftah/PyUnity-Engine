@@ -194,6 +194,11 @@ class SpriteRenderer:
         glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, self.sprite_width, self.sprite_height, 0,
                      GL_RGBA, GL_UNSIGNED_BYTE, self.sprite_data)
 
+        del self.sprite
+
+    def __del__(self):
+        glDeleteTextures(1, self.sprite_text_id)
+
     def size(self):
         return self.sprite_width / 100, self.sprite_height / 100
 
@@ -295,36 +300,6 @@ class Animation:
         glEnd()
 
         glDisable(GL_TEXTURE_2D)
-
-
-class ParticleSystem:
-    def __init__(self, sprite_name, num):
-        drawings_path = os.path.dirname(Drawings.__file__)
-        self.sprite_path = drawings_path + '\\' + sprite_name
-
-        self.sprite = pygame.image.load(self.sprite_path)
-        self.sprite_width = self.sprite.get_width()
-        self.sprite_height = self.sprite.get_height()
-
-        self.sprite_data = pygame.image.tostring(self.sprite, "RGBA", 1)
-        self.sprite_text_id = glGenTextures(1)
-
-        glBindTexture(GL_TEXTURE_2D, self.sprite_text_id)
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR)
-        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, self.sprite_width, self.sprite_height, 0,
-                     GL_RGBA, GL_UNSIGNED_BYTE, self.sprite_data)
-
-        self.alive = False
-
-        self.speed_list = [random.random() for _ in range(num)]
-        self.pos_list = [(0, 0) for _ in range(num)]
-
-    def activate(self):
-        self.alive = True
-
-    def render(self):
-        if self.alive is True:
-            pass
 
 
 class RectCollider:

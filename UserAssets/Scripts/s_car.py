@@ -31,21 +31,14 @@ def Update():
 
     if follow:
         speed = (player.transform.position - transform.position).normalized()
-        transform.position += speed * Time.deltaTime * 3
+        transform.position += speed * Time.deltaTime * 15
         transform.lookAtPoint(player.transform.position)
 
     else:
-        # if Input.KeyHold('8'):
-        #     transform.position += transform.up() * Time.deltaTime * 10
-        #
-        # if Input.KeyHold('5'):
-        #     transform.position -= transform.up() * Time.deltaTime * 10
-        #
-        # if Input.KeyHold('6'):
-        #     transform.rotation.z -= 180 * Time.deltaTime
-        #
-        # if Input.KeyHold('4'):
-        #     transform.rotation.z += 180 * Time.deltaTime
+
+        if Input.MouseKeyHoldDown(0):
+            fire = instantiate_script('fire')
+            fire.set_speed(transform.position, transform.up())
 
         if Input.KeyHold('8'):
             transform.position += Vector3(0, 1, 0) * Time.deltaTime * 10
@@ -60,4 +53,7 @@ def Update():
             transform.position -= Vector3(1, 0, 0) * Time.deltaTime * 10
 
         transform.lookAtPoint(Camera.screenToWorld(Input.MousePosition()))
+
+    Camera.position = transform.position
+
 
