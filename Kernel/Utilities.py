@@ -14,17 +14,17 @@ import math
 import pygame
 import random
 from OpenGL.GL import *
-from Kernel import Time
+from Kernel import Time, CollisionDetector
 from UserAssets import Drawings
 from Kernel.EventManager import __EnableScript, __DisableScript, __DestroyScript,\
     __SendMeggage, __InstantiateScript, __GetScript
 
 
 class Vector3:
-    def __str__(self):
+    def __str__(self,):
         return "{" + str(self.x) + ", " + str(self.y) + ", " + str(self.z) + "}"
 
-    def __init__(self, x, y, z):
+    def __init__(self, x=0., y=0., z=0.):
         """
 
         :param x: x value
@@ -194,7 +194,10 @@ class SpriteRenderer:
         glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, self.sprite_width, self.sprite_height, 0,
                      GL_RGBA, GL_UNSIGNED_BYTE, self.sprite_data)
 
-    def render(self, mul=1, brightness=1):
+    def size(self):
+        return self.sprite_width / 100, self.sprite_height / 100
+
+    def render(self, x=0, y=0, mul=1, brightness=1, color=Vector3(1, 1, 1)):
 
         """
             render the sprite at the origin.
@@ -207,20 +210,20 @@ class SpriteRenderer:
         rx = self.sprite_width / 100
         ry = self.sprite_height / 100
 
-        glColor3f(1 * brightness, 1 * brightness, 1 * brightness)
+        glColor3f(color.x * brightness, color.y * brightness, color.z * brightness)
 
         glBegin(GL_QUADS)
         glTexCoord2f(0, 0)
-        glVertex3f(-1 * rx, -1 * ry, 0)
+        glVertex3f(x - 1 * rx, y - 1 * ry, 0)
 
         glTexCoord2f(0, mul)
-        glVertex3f(-1 * rx, 1 * ry, 0)
+        glVertex3f(x - 1 * rx, y + 1 * ry, 0)
 
         glTexCoord2f(mul, mul)
-        glVertex3f(1 * rx, 1 * ry, 0)
+        glVertex3f(x + 1 * rx, y + 1 * ry, 0)
 
         glTexCoord2f(mul, 0)
-        glVertex3f(1 * rx, -1 * ry, 0)
+        glVertex3f(x + 1 * rx, y - 1 * ry, 0)
         glEnd()
 
         glDisable(GL_TEXTURE_2D)
@@ -324,6 +327,16 @@ class ParticleSystem:
             pass
 
 
+class RectCollider:
+    def __init__(self, script_id, transform, rectangle, message):
+        self.script_id = script_id
+        self.transform = transform
+        self.rectangle = rectangle
+        self.message = message
+
+        CollisionDetector.addRect(self)
+
+
 def send_message(script_id, method, *args):
     __SendMeggage(script_id, method, *args)
 
@@ -341,7 +354,7 @@ def destroy_script(script_id):
 
 
 def instantiate_script(script_name):
-    __InstantiateScript(script_name)
+    return __InstantiateScript(script_name)
 
 
 def get_script(script_id):

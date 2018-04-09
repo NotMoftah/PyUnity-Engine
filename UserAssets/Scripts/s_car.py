@@ -1,46 +1,63 @@
 from UserAssets.Scripts.basics import *
 
-car1 = Animation('player.png', 27, 2)
+car = SpriteRenderer('car.png')
 transform = Transform2D()
-
-speed = Vector3(0, 0, 0)
-animate = False
 
 
 def Start():
-    transform.scale = Vector3(2, 2, 2)
+    global player, follow
+    follow = False
+    player = get_script('player')
     transform.position.z = -1
+    transform.scale = Vector3(0.1, 0.1, 0.1)
 
 
 def Render():
-    # must add
+    global follow
+
     transform.applyTransformation()
 
-    # your render code here
-    car1.render(animate=animate)
+    if follow:
+        car.render(color=Vector3(1, 0, 0))
+    else:
+        car.render()
 
 
 def Update():
-    global speed, animate
+    global follow
 
-    animate = False
+    if Input.KeyDown('0'):
+        follow = not follow
 
-    if Input.KeyHold('d'):
-        transform.position += transform.right() * Time.deltaTime * 5
-        transform.scale.x = +2
-        animate = True
+    if follow:
+        speed = (player.transform.position - transform.position).normalized()
+        transform.position += speed * Time.deltaTime * 3
+        transform.lookAtPoint(player.transform.position)
 
-    if Input.KeyHold('a'):
-        transform.position -= transform.right() * Time.deltaTime * 5
-        transform.scale.x = -2
-        animate = True
-
-    if Input.KeyHold(' '):
-        speed = Vector3(0, 10, 0)
-
-    transform.position += speed * Time.deltaTime
-
-    if transform.position.y <= -1:
-        speed = Vector3(0, 0, 0)
     else:
-        speed += Vector3(0, -1, 0) * 30 * Time.deltaTime
+        # if Input.KeyHold('8'):
+        #     transform.position += transform.up() * Time.deltaTime * 10
+        #
+        # if Input.KeyHold('5'):
+        #     transform.position -= transform.up() * Time.deltaTime * 10
+        #
+        # if Input.KeyHold('6'):
+        #     transform.rotation.z -= 180 * Time.deltaTime
+        #
+        # if Input.KeyHold('4'):
+        #     transform.rotation.z += 180 * Time.deltaTime
+
+        if Input.KeyHold('8'):
+            transform.position += Vector3(0, 1, 0) * Time.deltaTime * 10
+
+        if Input.KeyHold('5'):
+            transform.position -= Vector3(0, 1, 0) * Time.deltaTime * 10
+
+        if Input.KeyHold('6'):
+            transform.position += Vector3(1, 0, 0) * Time.deltaTime * 10
+
+        if Input.KeyHold('4'):
+            transform.position -= Vector3(1, 0, 0) * Time.deltaTime * 10
+
+        transform.lookAtPoint(Camera.screenToWorld(Input.MousePosition()))
+

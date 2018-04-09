@@ -6,6 +6,7 @@
 """
 
 import UserAssets.Scripts
+import importlib.util
 import OpenGL.GL
 import os
 
@@ -97,7 +98,13 @@ def __DestroyScript(script_id):
 
 def __InstantiateScript(prefab_name):
     global __born_scripts
-    __born_scripts.append(prefab_name)
+    prefab_module, prefab_id = __LoadPrefab('UserAssets.Prefabs.' + prefab_name)
+    __born_scripts.append((prefab_module, prefab_id))
+
+    if hasattr(prefab_module, 'Start'):
+        prefab_module.Start()
+
+    return prefab_module
 
 
 def __GetScript(script_id):
@@ -189,34 +196,33 @@ def collectGarbage():
         __dead_scripts = []
 
 
-def __HookPrefab(script):
-    global __world_id_counter, __script_module
+def __LoadPrefab(prefab):
+    global __world_id_counter
     __world_id_counter = __world_id_counter + 1
 
-    ObjectModule = __import__(script, globals(), locals(), ['*'])
+    metaData = importlib.util.find_spec(prefab)
+    ObjectModule = importlib.util.module_from_spec(metaData)
+    metaData.loader.exec_module(ObjectModule)
 
     setattr(ObjectModule, '__id__', __world_id_counter)
+    return ObjectModule, __world_id_counter
 
-    current_id = __world_id_counter
 
-    __script_module[current_id] = ObjectModule
+def __HookPrefab(prefabModule, prefab_id):
+    __script_module[prefab_id] = prefabModule
 
-    subscribeStart(current_id, hasattr(ObjectModule, 'Start'))
-    subscribeUpdate(current_id, hasattr(ObjectModule, 'Update'))
-    subscribeRender(current_id, hasattr(ObjectModule, 'Render'))
-    subscribeLateUpdate(current_id, hasattr(ObjectModule, 'LateUpdate'))
-
-    return ObjectModule
+    subscribeStart(prefab_id, hasattr(prefabModule, 'Start'))
+    subscribeUpdate(prefab_id, hasattr(prefabModule, 'Update'))
+    subscribeRender(prefab_id, hasattr(prefabModule, 'Render'))
+    subscribeLateUpdate(prefab_id, hasattr(prefabModule, 'LateUpdate'))
 
 
 def updateDictionary():
-    global __born_scripts
+    global __born_scripts, __script_module
 
     if len(__born_scripts) > 0:
-        for prefab_name in __born_scripts:
-            obj = __HookPrefab('UserAssets.Prefabs.' + prefab_name)
-
-            if hasattr(obj, 'Start'):
-                obj.Start()
+        for prefab_module, prefab_id in __born_scripts:
+            __script_module[prefab_id] = prefab_module
+            __HookPrefab(prefab_module, prefab_id)
 
     __born_scripts = []
