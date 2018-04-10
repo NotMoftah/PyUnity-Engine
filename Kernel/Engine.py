@@ -27,7 +27,7 @@ def __init():
     """
     glutInit()
     pygame.init()
-    glutInitWindowSize(500, 500)
+    glutInitWindowSize(800, 600)
     glutCreateWindow(b'Game Engine')
     glutInitDisplayMode(GLUT_RGBA | GLUT_DEPTH | GLUT_WINDOW_DOUBLEBUFFER)
 

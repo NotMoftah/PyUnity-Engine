@@ -7,16 +7,17 @@ transform = Transform2D()
 def Start():
     global offset_x, offset_y
     offset_x, offset_y = maze.size()
+    Camera.clearColor = Vector3()
 
 
 def Render():
     transform.applyTransformation()
 
-    maze.render()
+    maze.render(brightness=0.3)
 
-    maze.render(x=offset_x * 2)
-    maze.render(y=offset_y * 2)
-    maze.render(x=offset_x * 2, y=offset_y * 2)
+    maze.render(brightness=0.3, x=offset_x * 2)
+    maze.render(brightness=0.3, y=offset_y * 2)
+    maze.render(brightness=0.3, x=offset_x * 2, y=offset_y * 2)
 
 
 def Update():

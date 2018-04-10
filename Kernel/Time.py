@@ -5,12 +5,12 @@
     -- Date: 4th of April 2018 at 11:40 PM
 """
 
-import time
+import time as tm
 
 deltaTime = 0.0
 fixedTime = 0.0
-__previousTime = time.time()
-__startTime = time.time()
+__previousTime = tm.time()
+__startTime = tm.time()
 
 
 def __UpdateDeltaTime():
@@ -20,9 +20,9 @@ def __UpdateDeltaTime():
     """
     global deltaTime, __previousTime, fixedTime
 
-    deltaTime = __Clamp(time.time() - __previousTime, 0.0001, 10)
-    fixedTime = time.time() - __startTime
-    __previousTime = time.time()
+    deltaTime = __Clamp(tm.time() - __previousTime, 0.0001, 10)
+    fixedTime = tm.time() - __startTime
+    __previousTime = tm.time()
 
 
 def __SleepTimeToLockFramsOn(fps):
@@ -33,9 +33,9 @@ def __SleepTimeToLockFramsOn(fps):
     """
     global __previousTime
     NormalSleepTime = 1. / fps
-    ElapsedTime = time.time() - __previousTime
+    ElapsedTime = tm.time() - __previousTime
     SleepTime = __Clamp(NormalSleepTime - ElapsedTime, 0, NormalSleepTime)
-    time.sleep(SleepTime)
+    tm.sleep(SleepTime)
 
 
 def __Clamp(value, min_val, max_val):

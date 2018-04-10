@@ -62,7 +62,7 @@ class Vector3:
         return self.x == other.x and self.y == other.y and self.z == other.z
 
     def __ne__(self, other):
-        return self.x != other.x and self.y != other.y and self.z != other.z
+        return not (self.x == other.x or self.y == other.y or self.z == other.z)
 
     def setValues(self, x, y, z):
         """
@@ -129,15 +129,20 @@ class Vector3:
         length = math.sqrt(self.x * self.x + self.y * self.y + self.z * self.z)
         return length
 
+    @staticmethod
+    def lerp(vec_a, vec_b, t):
+        return vec_a + (vec_b - vec_a) * t
+
 
 class Transform2D:
     def __init__(self, ):
+        self.__rotation = Vector3(0, 0, 0)
         self.position = Vector3(0, 0, 0)
-        self.rotation = Vector3(0, 0, 0)
         self.scale = Vector3(1, 1, 1)
 
         self.__up = Vector3(0, 1, 0)
         self.__right = Vector3(1, 0, 0)
+        self.__update_axis = True
 
     def applyTransformation(self):
         """
@@ -145,33 +150,59 @@ class Transform2D:
         """
         glTranslatef(self.position.x, self.position.y, self.position.z)
 
-        glRotatef(self.rotation.x, 1, 0, 0)
-        glRotatef(self.rotation.y, 0, 1, 0)
-        glRotatef(self.rotation.z, 0, 0, 1)
+        glRotatef(self.__rotation.x, 1, 0, 0)
+        glRotatef(self.__rotation.y, 0, 1, 0)
+        glRotatef(self.__rotation.z, 0, 0, 1)
 
         glScalef(self.scale.x, self.scale.y, self.scale.z)
 
+    @property
+    def rotation(self):
+        return self.__rotation
+
+    @rotation.setter
+    def rotation(self, vec):
+        self.__rotation = vec
+        self.__update_axis = True
+
+    @property
     def up(self):
         """
         the normalized up direction of the game object
         :return: Vector3
         """
+        if self.__update_axis:
+            self.__update_axis = False
+            ang = math.radians(self.rotation.z)
+            self.__up = Vector3(-math.sin(ang), math.cos(ang), 0)
+        return self.__up
 
-        ang = math.radians(self.rotation.z)
-        return Vector3(-math.sin(ang), math.cos(ang), 0)
-
+    @property
     def right(self):
         """
         the normalized right direction of the game object
         :return: Vector3
         """
+        if self.__update_axis:
+            self.__update_axis = False
+            ang = math.radians(self.rotation.z)
+            self.__right = Vector3(math.cos(ang), math.sin(ang), 0)
+        return self.__right
 
-        ang = math.radians(self.rotation.z)
-        return Vector3(math.cos(ang), math.sin(ang), 0)
+    @up.setter
+    def up(self, vec):
+        self.__rotation.z = math.degrees(math.atan2(vec.y, vec.x)) - 90
+        self.__update_axis = True
+
+    @right.setter
+    def right(self, vec):
+        self.__rotation.z = math.degrees(math.atan2(vec.y, vec.x))
+        self.__update_axis = True
 
     def lookAtPoint(self, vec):
         direction = (vec - self.position).normalized()
-        self.rotation.z = math.degrees(math.atan2(direction.y, direction.x)) - 90
+        self.__rotation.z = math.degrees(math.atan2(direction.y, direction.x)) - 90
+        self.__update_axis = True
 
 
 class SpriteRenderer:
