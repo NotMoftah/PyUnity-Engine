@@ -8,7 +8,7 @@
 import pygame
 from OpenGL.GL import *
 from OpenGL.GLUT import *
-from Kernel import Time, Input, Camera, EventManager
+from Kernel import Time, Input, Camera, EventManager, Physics
 
 
 def start():
@@ -54,10 +54,9 @@ def __GameLoopManager():
 
     __FrameUpdate()
     __RenderUpdate()
-
-    __InputUpdate()
-    __PhysicsUpdate()
     __LateFrameUpdate()
+    __PhysicsUpdate()
+    __InputUpdate()
 
     EventManager.collectGarbage()
     EventManager.updateDictionary()
@@ -91,7 +90,7 @@ def __RenderUpdate():
 
 
 def __PhysicsUpdate():
-    pass
+    Physics.__PhysicsUpdate()
 
 
 def __LateFrameUpdate():

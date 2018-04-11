@@ -5,9 +5,10 @@ transform = Transform2D()
 
 
 def Start():
-    global startTime
+    global startTime, rect
     transform.position.z = -1
     startTime = Time.fixedTime
+    rect = StaticRectCollider(__id__, (0, 0, 1, 1), 'hello')
 
 
 def Render():

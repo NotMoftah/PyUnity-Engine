@@ -14,8 +14,8 @@ import math
 import pygame
 import random
 from OpenGL.GL import *
-from Kernel import Time, CollisionDetector
 from UserAssets import Drawings
+from Kernel import Time, Physics
 from Kernel.EventManager import __EnableScript, __DisableScript, __DestroyScript,\
     __SendMeggage, __InstantiateScript, __GetScript
 
@@ -225,7 +225,7 @@ class SpriteRenderer:
         glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, self.sprite_width, self.sprite_height, 0,
                      GL_RGBA, GL_UNSIGNED_BYTE, self.sprite_data)
 
-        del self.sprite
+        del self.sprite, self.sprite_data
 
     def __del__(self):
         glDeleteTextures(1, self.sprite_text_id)
@@ -265,6 +265,78 @@ class SpriteRenderer:
         glDisable(GL_TEXTURE_2D)
 
 
+class ParticleSystem:
+    def __init__(self, sprite_name, num, duration, force):
+        """
+        :param sprite_name: the name of the sprite
+        """
+        drawings_path = os.path.dirname(Drawings.__file__)
+        self.sprite_path = drawings_path + '\\' + sprite_name
+
+        self.sprite = pygame.image.load(self.sprite_path)
+        self.sprite_width = self.sprite.get_width()
+        self.sprite_height = self.sprite.get_height()
+
+        self.sprite_data = pygame.image.tostring(self.sprite, "RGBA", 1)
+        self.sprite_text_id = glGenTextures(1)
+
+        glBindTexture(GL_TEXTURE_2D, self.sprite_text_id)
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR)
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, self.sprite_width, self.sprite_height, 0,
+                     GL_RGBA, GL_UNSIGNED_BYTE, self.sprite_data)
+
+        self.particles_positions = [(0, 0) for _ in range(num)]
+        self.particles_speeds = [(0, 0) for _ in range(num)]
+        self.start_time = -1 * duration
+        self.duration = duration
+        self.force = force
+        self.num = num
+
+        del self.sprite, self.sprite_data
+
+    def __del__(self):
+        glDeleteTextures(1, self.sprite_text_id)
+
+    def reset(self):
+        ang = [math.radians(random.randrange(-15, 15)) for _ in range(self.num)]
+        self.particles_speeds = [(random.random() * 100 * math.sin(ang[_]), random.random() * 100 * math.cos(ang[_])) for _ in range(self.num)]
+        self.particles_positions = [(0, 0) for _ in range(self.num)]
+        self.start_time = Time.fixedTime
+
+    def render(self):
+        if Time.fixedTime < self.start_time + self.duration:
+
+            glEnable(GL_TEXTURE_2D)
+            glBindTexture(GL_TEXTURE_2D, self.sprite_text_id)
+
+            rx = self.sprite_width / 100
+            ry = self.sprite_height / 100
+
+            glColor3f(1, 1, 1)
+            glBegin(GL_QUADS)
+
+            for i in range(self.num):
+                sx, sy = self.particles_positions[i]
+                dx, dy = self.particles_speeds[i]
+                x, y = sx + dx * Time.deltaTime, sy + dy * Time.deltaTime
+                self.particles_positions[i] = x, y
+
+                glTexCoord2f(0, 0)
+                glVertex3f(x - rx, y - ry, 0)
+
+                glTexCoord2f(0, 1)
+                glVertex3f(x - rx, y + ry, 0)
+
+                glTexCoord2f(1, 1)
+                glVertex3f(x + rx, y + ry, 0)
+
+                glTexCoord2f(1, 0)
+                glVertex3f(x + rx, y - ry, 0)
+
+            glEnd()
+            glDisable(GL_TEXTURE_2D)
+
+
 class Animation:
     def __init__(self, sprite_name, size, speed):
         """
@@ -286,6 +358,8 @@ class Animation:
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR)
         glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, self.sprite_width, self.sprite_height, 0,
                      GL_RGBA, GL_UNSIGNED_BYTE, self.sprite_data)
+
+        del self.sprite, self.sprite_data
 
     def __frame_bounds(self, animate):
         step = 1 / self.size
@@ -333,14 +407,14 @@ class Animation:
         glDisable(GL_TEXTURE_2D)
 
 
-class RectCollider:
-    def __init__(self, script_id, transform, rectangle, message):
+class StaticRectCollider:
+    def __init__(self, script_id, rect_size, rect_tag):
         self.script_id = script_id
-        self.transform = transform
-        self.rectangle = rectangle
-        self.message = message
 
-        CollisionDetector.addRect(self)
+        Physics.addStaticRect(script_id, rect_size, rect_tag)
+
+    def __del__(self):
+        Physics.delRect(self.script_id)
 
 
 def send_message(script_id, method, *args):

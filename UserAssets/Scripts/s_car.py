@@ -11,7 +11,7 @@ def Start():
     light = get_script('light')
     transform.position.z = -1
     transform.scale = Vector3(0.1, 0.1, 0.1)
-    Camera.size = 10
+    Camera.size = 8
 
 
 def Render():
@@ -39,9 +39,9 @@ def Update():
     else:
 
         if Input.MouseKeyDown(0):
-            fire = instantiate_script('fire')
-            fire.transform.position = transform.position
-            fire.transform.up = transform.up
+            bullet = instantiate_script('fire')
+            bullet.transform.position = transform.position
+            bullet.transform.up = transform.up
 
         if Input.KeyHold('8'):
             transform.position += Vector3(0, 1, 0) * Time.deltaTime * 10

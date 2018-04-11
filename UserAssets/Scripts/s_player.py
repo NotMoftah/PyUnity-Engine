@@ -1,6 +1,7 @@
 from UserAssets.Scripts.basics import *
 
 player = Animation('player.png', 27, 2)
+
 transform = Transform2D()
 
 speed = Vector3(0, 0, 0)
@@ -27,12 +28,12 @@ def Update():
     animate = False
 
     if Input.KeyHold('d'):
-        transform.position += transform.right() * Time.deltaTime * 5
+        transform.position += transform.right * Time.deltaTime * 5
         transform.scale.x = +2
         animate = True
 
     if Input.KeyHold('a'):
-        transform.position -= transform.right() * Time.deltaTime * 5
+        transform.position -= transform.right * Time.deltaTime * 5
         transform.scale.x = -2
         animate = True
 

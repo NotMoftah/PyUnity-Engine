@@ -10,8 +10,7 @@ from OpenGL.GLUT import *
 
 
 # Kernel
-from Kernel import Input, Time, Camera
-
+from Kernel import Input, Time, Camera, Physics
 
 # Utilities
 from Kernel.Utilities import *
