@@ -1,40 +1,36 @@
-static_rect_list = []
-
-
-def addStaticRect(rect_id, rect, rect_tag):
-    global static_rect_list
-    static_rect_list.append((rect_id, rect, rect_tag))
-
-
-def delRect(rect_id):
-    global static_rect_list
-    for i in range(len(static_rect_list)):
-        if static_rect_list[i][0] == rect_id:
-            del static_rect_list[i]
-            break
-
-
-def slowRectCast(rect_a):
-    for rect_id, rect_b, rect_tag in static_rect_list:
-        if __IsCollision(rect_a, rect_b):
-            return rect_id, rect_tag
-    return None
+__box_list = []
 
 
 def __PhysicsUpdate():
-    pass
-
-
-def __IsCollision(rect_a, rect_b):
     """
-        :param rect_a:  (min x, min y, max x, max y)
-        :param rect_b:  (min x, min y, max x, max y)
-        :return: True or False wither they collide or not
+        Sort and sweep collision detection.
+
+        #1 Sort all the box collider based on their X or Y axis.
+        #2 Clear all previous frame collisions.
+        #3 Sweep the list from left to right and search for all collisions.
+            * Sweep only collider with event method hooked to it.
+        #4 trigger all BoxCollider2D collision events
+
+        * Time complexity is almost always n log n unless all the boxes collider together then it's n ** 2.
+            - In that case it's optimal because we have to alert evey box that he has collied with the others.
+                - If there's no event attached to collider it'll always be n log n.
+
+        * Space complexity is always N + K. where K is max number of collisions.
     """
-    if rect_a[0] > rect_b[2] or rect_a[2] < rect_b[0]:
-        return False
+    __box_list.sort(key=lambda box: box.__start_pos_x())
 
-    if rect_a[1] > rect_b[3] or rect_a[3] < rect_b[1]:
-        return False
+    for box in __box_list:
+        box.__clear_collision()
 
-    return True
+    for i in range(len(__box_list)):
+        j = i
+
+        if __box_list[i].__method is not None:
+            while __box_list[i].__end_pos_x() < __box_list[j].__start_pos_x():
+                if __box_list[i].__is_collision(__box_list[j]):
+                    __box_list[i].__append_collision(__box_list[j].tag)
+                    __box_list[j].__append_collision(__box_list[i].tag)
+
+                j = j + 1
+
+        __box_list[i].__trigger_event()

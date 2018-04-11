@@ -407,14 +407,50 @@ class Animation:
         glDisable(GL_TEXTURE_2D)
 
 
-class StaticRectCollider:
-    def __init__(self, script_id, rect_size, rect_tag):
-        self.script_id = script_id
+class BoxCollider2D:
+    def __init__(self, width, height, transform, tag='box'):
+        self.tag = tag
+        self.width = width
+        self.height = height
+        self.transform = transform
 
-        Physics.addStaticRect(script_id, rect_size, rect_tag)
+        self.__method = None
+        self.__collisions = []
+        Physics.__box_list.append(self)
 
-    def __del__(self):
-        Physics.delRect(self.script_id)
+    def on_collision_trigger(self, method):
+        self.__method = method
+
+    def __append_collision(self, collision):
+        self.__collisions.append(collision)
+
+    def __clear_collision(self,):
+        self.__collisions = []
+
+    def __trigger_event(self):
+        if self.__method is not None:
+            self.__method(self.__collisions)
+
+    def __start_pos_x(self):
+        return self.transform.position.x - (self.width / 2)
+
+    def __start_pos_y(self):
+        return self.transform.position.y - (self.height / 2)
+
+    def __end_pos_x(self):
+        return self.transform.position.x + (self.width / 2)
+
+    def __end_pos_y(self):
+        return self.transform.position.y + (self.height / 2)
+
+    def __is_collision(self, box):
+        x1 = self.__start_pos_x() > box.end_pos_x()
+        x2 = self.__end_pos_x() < box.start_pos_x()
+
+        y1 = self.__start_pos_y() > box.end_pos_y()
+        y2 = self.__end_pos_y() < box.start_pos_y()
+
+        return not (x1 or x2 or y1 or y2)
 
 
 def send_message(script_id, method, *args):
