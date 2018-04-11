@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cd9934a8-35e4-46ec-9f89-0e9987d875b5" name="Default" comment="Scripts now are being rendering based on their z position.&#10;GL_DEPTH_TEST is now disabled. no need.&#10;Scripts can now be Enabled, Disabled and Destroyed.&#10;Send messages between scripts is now working.">
-      <change afterPath="$PROJECT_DIR$/Kernel/temp_test.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Delta Game Engine/.idea/Delta Game Engine.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../Delta Game Engine/.idea/Delta Game Engine.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Delta Game Engine/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Delta Game Engine/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Delta Game Engine/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Delta Game Engine/.idea/vcs.xml" afterDir="false" />
@@ -19,10 +18,7 @@
       <change beforePath="$PROJECT_DIR$/../Delta Game Engine/UserAssets/Scripts/s_test2.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../Delta Game Engine/UserAssets/Scripts/s_test3.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../Delta Game Engine/UserAssets/Scripts/s_test4.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Kernel/Physics.py" beforeDir="false" afterPath="$PROJECT_DIR$/Kernel/Physics.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Kernel/Utilities.py" beforeDir="false" afterPath="$PROJECT_DIR$/Kernel/Utilities.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UserAssets/Prefabs/fire.py" beforeDir="false" afterPath="$PROJECT_DIR$/UserAssets/Prefabs/fire.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kernel/temp_test.py" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -36,8 +32,8 @@
       <file leaf-file-name="s_player.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/UserAssets/Scripts/s_player.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="960">
-              <caret line="48" lean-forward="true" selection-start-line="48" selection-end-line="48" />
+            <state relative-caret-position="853">
+              <caret line="48" selection-start-line="48" selection-end-line="48" />
             </state>
           </provider>
         </entry>
@@ -166,13 +162,7 @@
             <path>
               <item name="GoEngine" type="b2602c69:ProjectViewProjectNode" />
               <item name="GoEngine" type="462c0819:PsiDirectoryNode" />
-              <item name="UserAssets" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="GoEngine" type="b2602c69:ProjectViewProjectNode" />
-              <item name="GoEngine" type="462c0819:PsiDirectoryNode" />
-              <item name="UserAssets" type="462c0819:PsiDirectoryNode" />
-              <item name="Scripts" type="462c0819:PsiDirectoryNode" />
+              <item name="Kernel" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -481,7 +471,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.1546875" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -763,9 +752,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="268">
           <caret line="53" column="7" selection-start-line="53" selection-start-column="7" selection-end-line="53" selection-end-column="7" />
-          <folding>
-            <element signature="e#0#18#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -780,17 +766,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="391">
           <caret line="422" lean-forward="true" selection-start-line="418" selection-start-column="20" selection-end-line="422" />
-          <folding>
-            <element signature="e#12607#12629#0" />
-            <element signature="e#12684#12719#0" />
-            <element signature="e#12763#12785#0" />
-            <element signature="e#12826#12900#0" />
-            <element signature="e#12939#12990#0" />
-            <element signature="e#13029#13081#0" />
-            <element signature="e#13118#13169#0" />
-            <element signature="e#13206#13258#0" />
-            <element signature="e#13303#13546#0" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -810,8 +785,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/UserAssets/Scripts/s_player.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="960">
-          <caret line="48" lean-forward="true" selection-start-line="48" selection-end-line="48" />
+        <state relative-caret-position="853">
+          <caret line="48" selection-start-line="48" selection-end-line="48" />
         </state>
       </provider>
     </entry>
