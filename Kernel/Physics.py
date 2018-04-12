@@ -1,10 +1,13 @@
-import copy
-
-box_list = []
+__box_dict = {}
 
 
-def removeBox(box):
-    pass
+def addBox(box):
+    __box_dict[box.collider_id] = box
+
+
+def __DestroyCollider(collider_id):
+    if collider_id in __box_dict:
+        del __box_dict[collider_id]
 
 
 def __PhysicsUpdate():
@@ -23,6 +26,7 @@ def __PhysicsUpdate():
 
         * Space complexity is always N + K. where K is max number of collisions.
     """
+    box_list = [v for k, v in __box_dict.items()]
     box_list.sort(key=lambda x: x.start_pos_x())
 
     for box in box_list:
@@ -34,8 +38,9 @@ def __PhysicsUpdate():
                 pass
 
             if box_list[i].is_collision(box_list[j]):
-                box_list[i].append_collision(box_list[j].tag)
-                box_list[j].append_collision(box_list[i].tag)
+                box_list[i].append_collision(box_list[j].collider_tag)
+                box_list[j].append_collision(box_list[i].collider_tag)
 
         box_list[i].trigger_event()
 
+4

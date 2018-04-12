@@ -1,8 +1,8 @@
 from UserAssets.Scripts.basics import *
 
-car = SpriteRenderer('car.png')
 transform = Transform2D()
-collider = BoxCollider2D(1, 1, transform, 'caro')
+car = SpriteRenderer('car.png')
+collider = BoxCollider2D(2, 2, transform, 'car')
 
 
 def Start():
@@ -13,6 +13,7 @@ def Start():
     transform.position.z = -1
     transform.scale = Vector3(0.1, 0.1, 0.1)
     Camera.size = 8
+    collider.on_collision_trigger(oncoll)
 
 
 def Render():
@@ -28,7 +29,7 @@ def Render():
 
 
 def Update():
-    global follow
+    global follow, player
 
     if Input.KeyDown('0'):
         follow = not follow
@@ -62,3 +63,10 @@ def Update():
     Camera.position = Vector3.lerp(Camera.position, transform.position, 2 * Time.deltaTime)
     Camera.position.z = -10
     light.transform.position = transform.position + Vector3(0, 0, +0.01)
+
+
+def oncoll(hits):
+    global follow
+    for hit in hits:
+        if hit == 'player':
+            follow = False

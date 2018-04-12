@@ -1,11 +1,9 @@
 from UserAssets.Scripts.basics import *
-
-player = Animation('player.png', 27, 2)
-transform = Transform2D()
-collider = BoxCollider2D(5, 5, transform)
-
-speed = Vector3(0, 0, 0)
 __id__ = 'player'
+transform = Transform2D()
+player = Animation('player.png', 27, 2)
+collider = BoxCollider2D(5, 5, transform, __id__, 'player')
+speed = Vector3(0, 0, 0)
 animate = True
 
 

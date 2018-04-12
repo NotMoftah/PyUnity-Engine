@@ -6,6 +6,7 @@
 """
 
 import UserAssets.Scripts
+import Kernel.Physics
 import importlib.util
 import Kernel.Time
 import OpenGL.GL
@@ -32,13 +33,16 @@ def loadScripts():
 
     for script in scripts:
         if script[:2] == 's_':
-            __HookMethods('UserAssets.Scripts.' + script[:-3])
+            __LoadScript('UserAssets.Scripts.' + script[:-3])
 
 
-def __HookMethods(script):
+def __LoadScript(script):
     global __world_id_counter, __script_module
     __world_id_counter = __world_id_counter + 1
-    ObjectModule = __import__(script, globals(), locals(), ['object'])
+
+    metaData = importlib.util.find_spec(script)
+    ObjectModule = importlib.util.module_from_spec(metaData)
+    metaData.loader.exec_module(ObjectModule)
 
     if hasattr(ObjectModule, '__id__'):
         current_id = ObjectModule.__id__
@@ -46,14 +50,12 @@ def __HookMethods(script):
         setattr(ObjectModule, '__id__', __world_id_counter)
         current_id = __world_id_counter
 
-    __script_module[current_id] = ObjectModule
 
+    __script_module[current_id] = ObjectModule
     subscribeStart(current_id, hasattr(ObjectModule, 'Start'))
     subscribeUpdate(current_id, hasattr(ObjectModule, 'Update'))
     subscribeRender(current_id, hasattr(ObjectModule, 'Render'))
     subscribeLateUpdate(current_id, hasattr(ObjectModule, 'LateUpdate'))
-
-    return ObjectModule
 
 
 def __DisableScript(script_id):
@@ -197,6 +199,8 @@ def collectGarbage():
             if obj in __script_module:
                 del __script_module[obj]
 
+            Kernel.Physics.__DestroyCollider(obj)
+
         __dead_scripts = []
 
     if Kernel.Time.fixedTime >= gc_time + 1:
@@ -210,9 +214,9 @@ def __LoadPrefab(prefab):
 
     metaData = importlib.util.find_spec(prefab)
     ObjectModule = importlib.util.module_from_spec(metaData)
+    setattr(ObjectModule, '__id__', __world_id_counter)
     metaData.loader.exec_module(ObjectModule)
 
-    setattr(ObjectModule, '__id__', __world_id_counter)
     return ObjectModule, __world_id_counter
 
 

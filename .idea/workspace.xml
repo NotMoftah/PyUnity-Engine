@@ -19,6 +19,7 @@
       <change beforePath="$PROJECT_DIR$/../Delta Game Engine/UserAssets/Scripts/s_test3.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../Delta Game Engine/UserAssets/Scripts/s_test4.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kernel/EventManager.py" beforeDir="false" afterPath="$PROJECT_DIR$/Kernel/EventManager.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Kernel/Physics.py" beforeDir="false" afterPath="$PROJECT_DIR$/Kernel/Physics.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Kernel/Utilities.py" beforeDir="false" afterPath="$PROJECT_DIR$/Kernel/Utilities.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/UserAssets/Prefabs/fire.py" beforeDir="false" afterPath="$PROJECT_DIR$/UserAssets/Prefabs/fire.py" afterDir="false" />
@@ -37,17 +38,20 @@
       <file leaf-file-name="s_player.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/UserAssets/Scripts/s_player.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="428">
-              <caret line="54" column="16" selection-start-line="54" selection-start-column="16" selection-end-line="54" selection-end-column="16" />
+            <state relative-caret-position="20">
+              <caret line="1" column="17" selection-start-line="1" selection-start-column="17" selection-end-line="1" selection-end-column="17" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="fire.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/UserAssets/Prefabs/fire.py">
+      <file leaf-file-name="EventManager.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Kernel/EventManager.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="80">
-              <caret line="4" column="29" selection-start-line="4" selection-start-column="29" selection-end-line="4" selection-end-column="29" />
+            <state relative-caret-position="276">
+              <caret line="47" selection-start-line="47" selection-end-line="47" />
+              <folding>
+                <element signature="e#117#142#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -73,6 +77,10 @@
       <find>__is_collision</find>
       <find>__trigger_event</find>
       <find>__method</find>
+      <find>global __script_module</find>
+      <find>__LoadPrefab</find>
+      <find>__HookMethods</find>
+      <find>__LoadScripts</find>
     </findStrings>
     <replaceStrings>
       <replace>__window_height</replace>
@@ -85,6 +93,10 @@
       <replace>clear_collision</replace>
       <replace>trigger_event</replace>
       <replace>method</replace>
+      <replace>global</replace>
+      <replace>__LoadPrefab</replace>
+      <replace>__LoadScripts</replace>
+      <replace>__LoadScript</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -118,16 +130,17 @@
         <option value="$PROJECT_DIR$/UserAssets/Prefabs/s_car.py" />
         <option value="$PROJECT_DIR$/UserAssets/Scripts/s_lighting.py" />
         <option value="$PROJECT_DIR$/Kernel/Time.py" />
-        <option value="$PROJECT_DIR$/Kernel/EventManager.py" />
         <option value="$PROJECT_DIR$/Kernel/Engine.py" />
         <option value="$PROJECT_DIR$/UserAssets/Scripts/s_map.py" />
         <option value="$PROJECT_DIR$/UserAssets/Scripts/basics.py" />
         <option value="$PROJECT_DIR$/Kernel/temp_test.py" />
-        <option value="$PROJECT_DIR$/Kernel/Physics.py" />
-        <option value="$PROJECT_DIR$/Kernel/Utilities.py" />
         <option value="$PROJECT_DIR$/UserAssets/Scripts/s_car.py" />
-        <option value="$PROJECT_DIR$/UserAssets/Scripts/s_player.py" />
+        <option value="$PROJECT_DIR$/UserAssets/Scripts/s_test.py" />
+        <option value="$PROJECT_DIR$/Kernel/Utilities.py" />
+        <option value="$PROJECT_DIR$/Kernel/Physics.py" />
         <option value="$PROJECT_DIR$/UserAssets/Prefabs/fire.py" />
+        <option value="$PROJECT_DIR$/UserAssets/Scripts/s_player.py" />
+        <option value="$PROJECT_DIR$/Kernel/EventManager.py" />
       </list>
     </option>
   </component>
@@ -548,20 +561,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/Kernel/Camera.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="740">
-          <caret line="38" lean-forward="true" selection-start-line="38" selection-end-line="38" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Kernel/Engine.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1200">
-          <caret line="63" column="21" selection-start-line="63" selection-start-column="21" selection-end-line="63" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Kernel/Input.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2120">
@@ -743,31 +742,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36/Lib/site-packages/OpenGL/GLUT/special.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="203">
-          <caret line="129" selection-start-line="129" selection-end-line="129" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36/Lib/random.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="203">
           <caret line="183" column="65" selection-start-line="183" selection-start-column="65" selection-end-line="183" selection-end-column="65" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Kernel/EventManager.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="9" selection-start-line="9" selection-end-line="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Kernel/Engine.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1000">
-          <caret line="53" lean-forward="true" selection-start-line="53" selection-end-line="53" />
         </state>
       </provider>
     </entry>
@@ -786,41 +764,79 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Kernel/temp_test.py" />
-    <entry file="file://$PROJECT_DIR$/Kernel/Physics.py">
+    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36/Lib/site-packages/OpenGL/GLUT/special.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="160">
-          <caret line="8" lean-forward="true" selection-start-line="8" selection-end-line="8" />
+        <state relative-caret-position="203">
+          <caret line="129" selection-start-line="129" selection-end-line="129" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/UserAssets/Prefabs/__init__.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/UserAssets/Scripts/s_test.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="40">
+          <caret line="2" column="14" selection-start-line="2" selection-start-column="14" selection-end-line="2" selection-end-column="14" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Kernel/Utilities.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="348">
-          <caret line="419" lean-forward="true" selection-start-line="419" selection-end-line="419" />
+        <state relative-caret-position="304">
+          <caret line="419" column="28" lean-forward="true" selection-start-line="419" selection-start-column="28" selection-end-line="419" selection-end-column="28" />
           <folding>
             <element signature="e#354#363#0" expanded="true" />
+            <element signature="e#13783#14018#0" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/UserAssets/Scripts/s_car.py">
+    <entry file="file://$PROJECT_DIR$/Kernel/Physics.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="15" column="4" selection-start-line="15" selection-start-column="4" selection-end-line="15" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/UserAssets/Scripts/s_player.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="428">
-          <caret line="54" column="16" selection-start-line="54" selection-start-column="16" selection-end-line="54" selection-end-column="16" />
+        <state relative-caret-position="440">
+          <caret line="41" column="69" selection-start-line="41" selection-start-column="57" selection-end-line="41" selection-end-column="69" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/UserAssets/Prefabs/fire.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="80">
-          <caret line="4" column="29" selection-start-line="4" selection-start-column="29" selection-end-line="4" selection-end-column="29" />
+          <caret line="4" column="19" selection-start-line="4" selection-start-column="19" selection-end-line="4" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Kernel/Engine.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="196">
+          <caret line="54" selection-start-line="54" selection-end-line="54" />
+          <folding>
+            <element signature="e#116#129#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/UserAssets/Scripts/s_car.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="571">
+          <caret line="64" selection-start-line="64" selection-end-line="64" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/UserAssets/Scripts/s_player.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="20">
+          <caret line="1" column="17" selection-start-line="1" selection-start-column="17" selection-end-line="1" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Kernel/EventManager.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="276">
+          <caret line="47" selection-start-line="47" selection-end-line="47" />
+          <folding>
+            <element signature="e#117#142#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

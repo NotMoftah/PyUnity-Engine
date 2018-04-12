@@ -408,18 +408,16 @@ class Animation:
 
 
 class BoxCollider2D:
-    def __init__(self, width, height, transform, tag='box'):
-        self.tag = tag
+    def __init__(self, width, height, transform, collider_id, collider_tag='box'):
         self.width = width
         self.height = height
         self.transform = transform
+        self.collider_id = collider_id
+        self.collider_tag = collider_tag
 
         self.method = None
         self.__collisions = []
-        Physics.box_list.append(self)
-
-    def __del__(self):
-        Physics.removeBox(self)
+        Physics.addBox(self)
 
     def render(self):
         x1 = self.start_pos_x()

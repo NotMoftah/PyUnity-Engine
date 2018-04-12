@@ -2,7 +2,7 @@ from UserAssets.Scripts.basics import *
 
 car = SpriteRenderer('toto.png')
 transform = Transform2D()
-collider = BoxCollider2D(2, 2, transform, tag='bullet')
+collider = BoxCollider2D(2, 2, transform, __id__, collider_tag='bullet')
 
 
 def Start():
@@ -21,7 +21,7 @@ def Update():
     global startTime
     transform.position += transform.up * 30 * Time.deltaTime
 
-    if Time.fixedTime >= startTime + 50:
+    if Time.fixedTime >= startTime + 1:
         destroy_script(__id__)
 
 
