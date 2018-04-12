@@ -1,4 +1,10 @@
-__box_list = []
+import copy
+
+box_list = []
+
+
+def removeBox(box):
+    pass
 
 
 def __PhysicsUpdate():
@@ -17,20 +23,19 @@ def __PhysicsUpdate():
 
         * Space complexity is always N + K. where K is max number of collisions.
     """
-    __box_list.sort(key=lambda box: box.__start_pos_x())
+    box_list.sort(key=lambda x: x.start_pos_x())
 
-    for box in __box_list:
-        box.__clear_collision()
+    for box in box_list:
+        box.clear_collision()
 
-    for i in range(len(__box_list)):
-        j = i
+    for i in range(len(box_list)):
+        for j in range(i + 1, len(box_list)):
+            if box_list[i].start_pos_x() > box_list[j].end_pos_x():
+                pass
 
-        if __box_list[i].__method is not None:
-            while __box_list[i].__end_pos_x() < __box_list[j].__start_pos_x():
-                if __box_list[i].__is_collision(__box_list[j]):
-                    __box_list[i].__append_collision(__box_list[j].tag)
-                    __box_list[j].__append_collision(__box_list[i].tag)
+            if box_list[i].is_collision(box_list[j]):
+                box_list[i].append_collision(box_list[j].tag)
+                box_list[j].append_collision(box_list[i].tag)
 
-                j = j + 1
+        box_list[i].trigger_event()
 
-        __box_list[i].__trigger_event()

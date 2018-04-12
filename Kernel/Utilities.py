@@ -414,41 +414,60 @@ class BoxCollider2D:
         self.height = height
         self.transform = transform
 
-        self.__method = None
+        self.method = None
         self.__collisions = []
-        Physics.__box_list.append(self)
+        Physics.box_list.append(self)
+
+    def __del__(self):
+        Physics.removeBox(self)
+
+    def render(self):
+        x1 = self.start_pos_x()
+        y1 = self.start_pos_y()
+        x2 = self.end_pos_x()
+        y2 = self.end_pos_y()
+
+        glColor3f(1, 1, 1)
+        glLineWidth(1)
+
+        glBegin(GL_LINE_LOOP)
+        glVertex3f(x1, y1, -1)
+        glVertex3f(x1, y2, -1)
+        glVertex3f(x2, y2, -1)
+        glVertex3f(x2, y1, -1)
+        glEnd()
 
     def on_collision_trigger(self, method):
-        self.__method = method
+        self.method = method
 
-    def __append_collision(self, collision):
+    def append_collision(self, collision):
         self.__collisions.append(collision)
 
-    def __clear_collision(self,):
+    def clear_collision(self,):
         self.__collisions = []
 
-    def __trigger_event(self):
-        if self.__method is not None:
-            self.__method(self.__collisions)
+    def trigger_event(self):
+        if self.method is not None:
+            self.method(self.__collisions)
 
-    def __start_pos_x(self):
+    def start_pos_x(self):
         return self.transform.position.x - (self.width / 2)
 
-    def __start_pos_y(self):
+    def start_pos_y(self):
         return self.transform.position.y - (self.height / 2)
 
-    def __end_pos_x(self):
+    def end_pos_x(self):
         return self.transform.position.x + (self.width / 2)
 
-    def __end_pos_y(self):
+    def end_pos_y(self):
         return self.transform.position.y + (self.height / 2)
 
-    def __is_collision(self, box):
-        x1 = self.__start_pos_x() > box.end_pos_x()
-        x2 = self.__end_pos_x() < box.start_pos_x()
+    def is_collision(self, box):
+        x1 = self.start_pos_x() > box.end_pos_x()
+        x2 = self.end_pos_x() < box.start_pos_x()
 
-        y1 = self.__start_pos_y() > box.end_pos_y()
-        y2 = self.__end_pos_y() < box.start_pos_y()
+        y1 = self.start_pos_y() > box.end_pos_y()
+        y2 = self.end_pos_y() < box.start_pos_y()
 
         return not (x1 or x2 or y1 or y2)
 

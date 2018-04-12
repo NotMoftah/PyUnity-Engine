@@ -1,8 +1,8 @@
 from UserAssets.Scripts.basics import *
 
 player = Animation('player.png', 27, 2)
-
 transform = Transform2D()
+collider = BoxCollider2D(5, 5, transform)
 
 speed = Vector3(0, 0, 0)
 __id__ = 'player'
@@ -10,6 +10,8 @@ animate = True
 
 
 def Render():
+    collider.render()
+
     # must add
     transform.applyTransformation()
 
@@ -20,6 +22,7 @@ def Render():
 def Start():
     transform.scale = Vector3(2, 2, 2)
     transform.position.z = -1
+    collider.on_collision_trigger(oncoll)
 
 
 def Update():
@@ -46,3 +49,10 @@ def Update():
         speed = Vector3(0, 0, 0)
     else:
         speed += Vector3(0, -1, 0) * 30 * Time.deltaTime
+
+
+def oncoll(hits):
+    global speed
+    for hit in hits:
+        if hit == 'bullet':
+            speed = Vector3(0, 10, 0)

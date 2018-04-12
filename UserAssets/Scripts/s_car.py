@@ -2,6 +2,7 @@ from UserAssets.Scripts.basics import *
 
 car = SpriteRenderer('car.png')
 transform = Transform2D()
+collider = BoxCollider2D(1, 1, transform, 'caro')
 
 
 def Start():
@@ -16,6 +17,7 @@ def Start():
 
 def Render():
     global follow
+    collider.render()
 
     transform.applyTransformation()
 
@@ -60,4 +62,3 @@ def Update():
     Camera.position = Vector3.lerp(Camera.position, transform.position, 2 * Time.deltaTime)
     Camera.position.z = -10
     light.transform.position = transform.position + Vector3(0, 0, +0.01)
-
