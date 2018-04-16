@@ -3,7 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/GoEngine.iml" filepath="$PROJECT_DIR$/.idea/GoEngine.iml" />
-      <module fileurl="file://$PROJECT_DIR$/../PyGorithm/.idea/PyGorithm.iml" filepath="$PROJECT_DIR$/../PyGorithm/.idea/PyGorithm.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../openAI/.idea/openAI.iml" filepath="$PROJECT_DIR$/../openAI/.idea/openAI.iml" />
     </modules>
   </component>
 </project>

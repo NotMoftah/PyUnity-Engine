@@ -35,7 +35,7 @@ def __PhysicsUpdate():
     for i in range(len(box_list)):
         for j in range(i + 1, len(box_list)):
             if box_list[i].start_pos_x() > box_list[j].end_pos_x():
-                pass
+                break
 
             if box_list[i].is_collision(box_list[j]):
                 box_list[i].append_collision(box_list[j].collider_tag)
@@ -43,4 +43,3 @@ def __PhysicsUpdate():
 
         box_list[i].trigger_event()
 
-4

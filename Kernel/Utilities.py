@@ -17,7 +17,7 @@ from OpenGL.GL import *
 from UserAssets import Drawings
 from Kernel import Time, Physics
 from Kernel.EventManager import __EnableScript, __DisableScript, __DestroyScript,\
-    __SendMeggage, __InstantiateScript, __GetScript
+    __SendMeggage, __InstantiateScript, __GetScript, __CastEvent
 
 
 class Vector3:
@@ -470,6 +470,10 @@ class BoxCollider2D:
         return not (x1 or x2 or y1 or y2)
 
 
+def castEvent(event_name, *args):
+    __CastEvent(event_name, *args)
+
+
 def send_message(script_id, method, *args):
     __SendMeggage(script_id, method, *args)
 
@@ -492,3 +496,7 @@ def instantiate_script(script_name):
 
 def get_script(script_id):
     return __GetScript(script_id)
+
+
+def lerp(vec_a, vec_b, t):
+    return vec_a + (vec_b - vec_a) * t

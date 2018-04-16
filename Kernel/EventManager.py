@@ -19,6 +19,7 @@ __script_module = {}
 __start = {}
 __render = {}
 __update = {}
+__events = {}
 __late_update = {}
 
 __born_scripts = []
@@ -50,11 +51,11 @@ def __LoadScript(script):
         setattr(ObjectModule, '__id__', __world_id_counter)
         current_id = __world_id_counter
 
-
     __script_module[current_id] = ObjectModule
     subscribeStart(current_id, hasattr(ObjectModule, 'Start'))
     subscribeUpdate(current_id, hasattr(ObjectModule, 'Update'))
     subscribeRender(current_id, hasattr(ObjectModule, 'Render'))
+    subscribeEvents(current_id, hasattr(ObjectModule, 'Events'))
     subscribeLateUpdate(current_id, hasattr(ObjectModule, 'LateUpdate'))
 
 
@@ -70,6 +71,9 @@ def __DisableScript(script_id):
     if script_id in __update:
         __update[script_id] = False
 
+    if script_id in __events:
+        __events[script_id] = False
+
     if script_id in __late_update:
         __late_update[script_id] = False
 
@@ -80,6 +84,7 @@ def __EnableScript(script_id):
     subscribeStart(script_id, hasattr(__script_module[script_id], 'Start'))
     subscribeUpdate(script_id, hasattr(__script_module[script_id], 'Update'))
     subscribeRender(script_id, hasattr(__script_module[script_id], 'Render'))
+    subscribeEvents(script_id, hasattr(__script_module[script_id], 'Events'))
     subscribeLateUpdate(script_id, hasattr(__script_module[script_id], 'LateUpdate'))
 
 
@@ -136,16 +141,23 @@ def subscribeLateUpdate(current_id, status):
     __late_update[current_id] = status
 
 
-def castStart():
-    global __script_module, __start
+def subscribeEvents(current_id, status):
+    __events[current_id] = status
 
+
+def __CastEvent(event_name, *args):
+    for subscriber in __script_module:
+        if __events[subscriber]:
+            __script_module[subscriber].Events(event_name, *args)
+
+
+def castStart():
     for subscriber in __script_module:
         if __start[subscriber]:
             __script_module[subscriber].Start()
 
 
 def castRender():
-    global __script_module, __render
     # first we sort the objects based on the distance from the camera.
     list_of_rendering = [__script_module[x] for x in __script_module if __render[x]]
 
@@ -164,16 +176,12 @@ def castRender():
 
 
 def castUpdate():
-    global __script_module, __update
-
     for subscriber in __script_module:
         if __update[subscriber]:
             __script_module[subscriber].Update()
 
 
 def castLateUpdate():
-    global __script_module, __late_update
-
     for subscriber in __script_module:
         if __late_update[subscriber]:
             __script_module[subscriber].LateUpdate()
@@ -226,6 +234,7 @@ def __HookPrefab(prefabModule, prefab_id):
     subscribeStart(prefab_id, hasattr(prefabModule, 'Start'))
     subscribeUpdate(prefab_id, hasattr(prefabModule, 'Update'))
     subscribeRender(prefab_id, hasattr(prefabModule, 'Render'))
+    subscribeEvents(prefab_id, hasattr(prefabModule, 'Events'))
     subscribeLateUpdate(prefab_id, hasattr(prefabModule, 'LateUpdate'))
 
 

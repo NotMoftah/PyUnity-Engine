@@ -1,5 +1,4 @@
 from UserAssets.Scripts.basics import *
-import random
 
 transform = Transform2D()
 light = SpriteRenderer('light2.png')

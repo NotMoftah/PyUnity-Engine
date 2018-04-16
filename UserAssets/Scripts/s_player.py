@@ -1,4 +1,5 @@
 from UserAssets.Scripts.basics import *
+
 __id__ = 'player'
 transform = Transform2D()
 player = Animation('player.png', 27, 2)
