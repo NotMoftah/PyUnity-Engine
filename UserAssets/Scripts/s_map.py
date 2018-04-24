@@ -1,23 +1,23 @@
 from UserAssets.Scripts.basics import *
 
-maze = SpriteRenderer('floor.png')
 transform = Transform2D()
+maze = SpriteRenderer('floor.png')
 
 
 def Start():
     global offset_x, offset_y
-    offset_x, offset_y = maze.size()
     Camera.clearColor = Vector3()
+    offset_x, offset_y = maze.size()
+    transform.scale = Vector3(4, 4, 1)
 
 
 def Render():
     transform.applyTransformation()
 
-    maze.render(brightness=0.3)
-
-    maze.render(brightness=0.3, x=offset_x * 2)
-    maze.render(brightness=0.3, y=offset_y * 2)
-    maze.render(brightness=0.3, x=offset_x * 2, y=offset_y * 2)
+    maze.render(mul=4, brightness=0.3)
+    maze.render(mul=4, brightness=0.3, x=offset_x * 2)
+    maze.render(mul=4, brightness=0.3, y=offset_y * 2)
+    maze.render(mul=4, brightness=0.3, x=offset_x * 2, y=offset_y * 2)
 
 
 def Update():

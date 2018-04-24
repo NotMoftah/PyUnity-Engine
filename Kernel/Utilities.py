@@ -416,7 +416,6 @@ class BoxCollider2D:
         self.collider_tag = collider_tag
 
         self.method = None
-        self.__collisions = []
         Physics.addBox(self)
 
     def render(self):
@@ -438,15 +437,9 @@ class BoxCollider2D:
     def on_collision_trigger(self, method):
         self.method = method
 
-    def append_collision(self, collision):
-        self.__collisions.append(collision)
-
-    def clear_collision(self,):
-        self.__collisions = []
-
-    def trigger_event(self):
+    def trigger_hit_event(self, hit_id, hit_tag):
         if self.method is not None:
-            self.method(self.__collisions)
+            self.method(hit_id, hit_tag)
 
     def start_pos_x(self):
         return self.transform.position.x - (self.width / 2)

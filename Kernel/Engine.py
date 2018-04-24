@@ -51,7 +51,6 @@ def __GameLoopManager():
         The main loop in which everything take place in order.
     """
     Time.__UpdateDeltaTime()
-
     __FrameUpdate()
     __RenderUpdate()
     __LateFrameUpdate()

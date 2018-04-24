@@ -1,6 +1,5 @@
 __box_dict = {}
 
-
 def addBox(box):
     __box_dict[box.collider_id] = box
 
@@ -29,17 +28,12 @@ def __PhysicsUpdate():
     box_list = [v for k, v in __box_dict.items()]
     box_list.sort(key=lambda x: x.start_pos_x())
 
-    for box in box_list:
-        box.clear_collision()
-
     for i in range(len(box_list)):
         for j in range(i + 1, len(box_list)):
-            if box_list[i].start_pos_x() > box_list[j].end_pos_x():
+            if box_list[i].end_pos_x() < box_list[j].start_pos_x():
                 break
 
             if box_list[i].is_collision(box_list[j]):
-                box_list[i].append_collision(box_list[j].collider_tag)
-                box_list[j].append_collision(box_list[i].collider_tag)
-
-        box_list[i].trigger_event()
-
+                box_list[i].trigger_hit_event(box_list[j].collider_id, box_list[j].collider_tag)
+                box_list[j].trigger_hit_event(box_list[i].collider_id, box_list[i].collider_tag)
+                break

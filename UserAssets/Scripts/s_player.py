@@ -50,8 +50,7 @@ def Update():
         speed += Vector3(0, -1, 0) * 30 * Time.deltaTime
 
 
-def oncoll(hits):
+def oncoll(hit_id, hit_tag):
     global speed
-    for hit in hits:
-        if hit == 'bullet':
-            speed = Vector3(0, 10, 0)
+    if hit_tag == 'bullet':
+        speed = Vector3(0, 10, 0)

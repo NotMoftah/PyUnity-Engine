@@ -13,7 +13,7 @@ def Start():
     transform.position.z = -1
     transform.scale = Vector3(0.1, 0.1, 0.1)
     Camera.size = 8
-    collider.on_collision_trigger(oncoll)
+    collider.on_collision_trigger(onColl)
 
 
 def Render():
@@ -41,7 +41,7 @@ def Update():
 
     else:
 
-        if Input.MouseKeyDown(0):
+        if Input.MouseKeyHoldDown(0):
             bullet = instantiate_script('fire')
             bullet.transform.position = transform.position
             bullet.transform.up = transform.up
@@ -65,8 +65,7 @@ def Update():
     light.transform.position = transform.position + Vector3(0, 0, +0.01)
 
 
-def oncoll(hits):
+def onColl(hit_id, hit_tag):
     global follow
-    for hit in hits:
-        if hit == 'player':
-            follow = False
+    if hit_tag == 'player':
+        follow = False

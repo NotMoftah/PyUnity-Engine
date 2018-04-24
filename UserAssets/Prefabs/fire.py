@@ -12,16 +12,15 @@ def Start():
 
 
 def Render():
-    collider.render()
     transform.applyTransformation()
     car.render()
 
 
 def Update():
     global startTime
-    transform.position += transform.up * 30 * Time.deltaTime
+    transform.position += transform.up * 10 * Time.deltaTime
 
-    if Time.fixedTime >= startTime + 1:
+    if Time.fixedTime >= startTime + 15:
         destroy_script(__id__)
 
 
