@@ -21,7 +21,6 @@
       <change beforePath="$PROJECT_DIR$/../Delta Game Engine/UserAssets/Scripts/s_test3.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../Delta Game Engine/UserAssets/Scripts/s_test4.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UserAssets/Scripts/basics.py" beforeDir="false" afterPath="$PROJECT_DIR$/UserAssets/Scripts/basics.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../openAI/Cartpole Keras/CartPole_Train.py" beforeDir="false" afterPath="$PROJECT_DIR$/../openAI/Cartpole Keras/CartPole_Train.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -594,12 +593,18 @@
       <option name="project" value="LOCAL" />
       <updated>1524760251369</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="Docing the basics script">
+      <created>1524772133374</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1524772133374</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.12135417" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -635,7 +640,8 @@
     <MESSAGE value="CartPole and Pendulum using Keras." />
     <MESSAGE value="collision now works on only the first item to hit." />
     <MESSAGE value="fix bug where disables script still have a collider in the game!" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix bug where disables script still have a collider in the game!" />
+    <MESSAGE value="Docing the basics script" />
+    <option name="LAST_COMMIT_MESSAGE" value="Docing the basics script" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
