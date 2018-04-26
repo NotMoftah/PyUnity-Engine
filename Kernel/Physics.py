@@ -1,7 +1,18 @@
 __box_dict = {}
 
+
 def addBox(box):
-    __box_dict[box.collider_id] = box
+    __box_dict[box.collider_id] = [box, True]
+
+
+def __EnableCollider(collider_id):
+    if collider_id in __box_dict:
+        __box_dict[collider_id][1] = True
+
+
+def __DisableCollider(collider_id):
+    if collider_id in __box_dict:
+        __box_dict[collider_id][1] = False
 
 
 def __DestroyCollider(collider_id):
@@ -25,7 +36,7 @@ def __PhysicsUpdate():
 
         * Space complexity is always N + K. where K is max number of collisions.
     """
-    box_list = [v for k, v in __box_dict.items()]
+    box_list = [v[0] for k, v in __box_dict.items() if v[1] is True]
     box_list.sort(key=lambda x: x.start_pos_x())
 
     for i in range(len(box_list)):

@@ -77,6 +77,8 @@ def __DisableScript(script_id):
     if script_id in __late_update:
         __late_update[script_id] = False
 
+    Kernel.Physics.__DisableCollider(script_id)
+
 
 def __EnableScript(script_id):
     global __script_module
@@ -86,6 +88,7 @@ def __EnableScript(script_id):
     subscribeRender(script_id, hasattr(__script_module[script_id], 'Render'))
     subscribeEvents(script_id, hasattr(__script_module[script_id], 'Events'))
     subscribeLateUpdate(script_id, hasattr(__script_module[script_id], 'LateUpdate'))
+    Kernel.Physics.__EnableCollider(script_id)
 
 
 def __SendMeggage(script_id, method_name, *args):

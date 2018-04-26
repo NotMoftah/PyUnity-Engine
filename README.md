@@ -8,15 +8,12 @@
 
   - GameObjects Transformation.
   - Camera Transformation.
+  - Collision Detection.
   - Sprite Rendering.
   - lighting.
   - Timing.
   - ...
  
-# Comming:
-
-  - Physics
-  - ...
 
 # Notes:
-    This game eninge is pure OpenGL EXCEPT for the usage of pyGame to load images.
+    This game engine is pure OpenGL EXCEPT for the usage of pyGame to load images.

@@ -12,7 +12,6 @@
 import os
 import math
 import pygame
-import random
 from OpenGL.GL import *
 from UserAssets import Drawings
 from Kernel import Time, Physics
@@ -265,76 +264,31 @@ class SpriteRenderer:
         glDisable(GL_TEXTURE_2D)
 
 
-class ParticleSystem:
-    def __init__(self, sprite_name, num, duration, force):
+class Texture:
+    def __init__(self, sprite_name):
         """
         :param sprite_name: the name of the sprite
         """
         drawings_path = os.path.dirname(Drawings.__file__)
-        self.sprite_path = drawings_path + '\\' + sprite_name
+        self._sprite_path = drawings_path + '\\' + sprite_name
 
-        self.sprite = pygame.image.load(self.sprite_path)
-        self.sprite_width = self.sprite.get_width()
-        self.sprite_height = self.sprite.get_height()
+        self._sprite = pygame.image.load(self._sprite_path)
 
-        self.sprite_data = pygame.image.tostring(self.sprite, "RGBA", 1)
-        self.sprite_text_id = glGenTextures(1)
+        self._sprite_data = pygame.image.tostring(self._sprite, "RGBA", 1)
 
-        glBindTexture(GL_TEXTURE_2D, self.sprite_text_id)
+        self.texture_width = self._sprite.get_width()
+        self.texture_height = self._sprite.get_height()
+        self.texture_id = glGenTextures(1)
+
+        glBindTexture(GL_TEXTURE_2D, self.texture_id)
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR)
-        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, self.sprite_width, self.sprite_height, 0,
-                     GL_RGBA, GL_UNSIGNED_BYTE, self.sprite_data)
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, self.texture_width, self.texture_height, 0,
+                     GL_RGBA, GL_UNSIGNED_BYTE, self._sprite_data)
 
-        self.particles_positions = [(0, 0) for _ in range(num)]
-        self.particles_speeds = [(0, 0) for _ in range(num)]
-        self.start_time = -1 * duration
-        self.duration = duration
-        self.force = force
-        self.num = num
-
-        del self.sprite, self.sprite_data
+        del self._sprite, self._sprite_data
 
     def __del__(self):
-        glDeleteTextures(1, self.sprite_text_id)
-
-    def reset(self):
-        ang = [math.radians(random.randrange(-15, 15)) for _ in range(self.num)]
-        self.particles_speeds = [(random.random() * 100 * math.sin(ang[_]), random.random() * 100 * math.cos(ang[_])) for _ in range(self.num)]
-        self.particles_positions = [(0, 0) for _ in range(self.num)]
-        self.start_time = Time.fixedTime
-
-    def render(self):
-        if Time.fixedTime < self.start_time + self.duration:
-
-            glEnable(GL_TEXTURE_2D)
-            glBindTexture(GL_TEXTURE_2D, self.sprite_text_id)
-
-            rx = self.sprite_width / 100
-            ry = self.sprite_height / 100
-
-            glColor3f(1, 1, 1)
-            glBegin(GL_QUADS)
-
-            for i in range(self.num):
-                sx, sy = self.particles_positions[i]
-                dx, dy = self.particles_speeds[i]
-                x, y = sx + dx * Time.deltaTime, sy + dy * Time.deltaTime
-                self.particles_positions[i] = x, y
-
-                glTexCoord2f(0, 0)
-                glVertex3f(x - rx, y - ry, 0)
-
-                glTexCoord2f(0, 1)
-                glVertex3f(x - rx, y + ry, 0)
-
-                glTexCoord2f(1, 1)
-                glVertex3f(x + rx, y + ry, 0)
-
-                glTexCoord2f(1, 0)
-                glVertex3f(x + rx, y - ry, 0)
-
-            glEnd()
-            glDisable(GL_TEXTURE_2D)
+        glDeleteTextures(1, self.texture_id)
 
 
 class Animation:
