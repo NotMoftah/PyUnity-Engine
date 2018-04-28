@@ -71,9 +71,6 @@ def __DisableScript(script_id):
     if script_id in __update:
         __update[script_id] = False
 
-    if script_id in __events:
-        __events[script_id] = False
-
     if script_id in __late_update:
         __late_update[script_id] = False
 

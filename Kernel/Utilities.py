@@ -210,27 +210,32 @@ class SpriteRenderer:
         :param sprite_name: the name of the sprite
         """
         drawings_path = os.path.dirname(Drawings.__file__)
-        self.sprite_path = drawings_path + '\\' + sprite_name
+        sprite_path = drawings_path + '\\' + sprite_name
 
-        self.sprite = pygame.image.load(self.sprite_path)
-        self.sprite_width = self.sprite.get_width()
-        self.sprite_height = self.sprite.get_height()
+        self._sprite = pygame.image.load(sprite_path)
+        self._sprite_width = self._sprite.get_width()
+        self._sprite_height = self._sprite.get_height()
 
-        self.sprite_data = pygame.image.tostring(self.sprite, "RGBA", 1)
-        self.sprite_text_id = glGenTextures(1)
+        self._sprite_data = pygame.image.tostring(self._sprite, "RGBA", 1)
+        self._sprite_text_id = glGenTextures(1)
 
-        glBindTexture(GL_TEXTURE_2D, self.sprite_text_id)
+        glBindTexture(GL_TEXTURE_2D, self._sprite_text_id)
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR)
-        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, self.sprite_width, self.sprite_height, 0,
-                     GL_RGBA, GL_UNSIGNED_BYTE, self.sprite_data)
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, self._sprite_width, self._sprite_height, 0,
+                     GL_RGBA, GL_UNSIGNED_BYTE, self._sprite_data)
 
-        del self.sprite, self.sprite_data
+        del self._sprite, self._sprite_data
 
     def __del__(self):
-        glDeleteTextures(1, self.sprite_text_id)
+        glDeleteTextures(1, self._sprite_text_id)
 
+    @property
     def size(self):
-        return self.sprite_width / 100, self.sprite_height / 100
+        """
+        the normalized right direction of the game object
+        :return: Vector3
+        """
+        return self._sprite_width / 100, self._sprite_height / 100
 
     def render(self, x=0, y=0, mul=1, brightness=1, color=Vector3(1, 1, 1)):
 
@@ -240,10 +245,10 @@ class SpriteRenderer:
 
         glEnable(GL_TEXTURE_2D)
 
-        glBindTexture(GL_TEXTURE_2D, self.sprite_text_id)
+        glBindTexture(GL_TEXTURE_2D, self._sprite_text_id)
 
-        rx = self.sprite_width / 100
-        ry = self.sprite_height / 100
+        rx = self._sprite_width / 100
+        ry = self._sprite_height / 100
 
         glColor3f(color.x * brightness, color.y * brightness, color.z * brightness)
 
