@@ -9,12 +9,13 @@
     -- Author : AbdElAziz Mofath
     -- Date: 4th of April 2018 at 7:40 PM
 """
-import os
 import math
 import pygame
 from OpenGL.GL import *
+from OpenGL.GLUT import *
 from UserAssets import Drawings
 from Kernel import Time, Physics
+from Kernel.DataBase import get_variable, set_variable
 from Kernel.EventManager import __EnableScript, __DisableScript, __DestroyScript,\
     __SendMeggage, __InstantiateScript, __GetScript, __CastEvent
 
@@ -119,14 +120,38 @@ class Vector3:
                          self.x * vec.y - self.y * vec.x)
         return newVec
 
+    def dot(self, vec):
+        """
+        the dot product of multiplying the current vector by vector vec
+        * Doesnt affect the current vector values.
+
+        :param vec: vector b in the notation dot = a . b
+        :return: Vector3
+        """
+        val = self.x * vec.x + self.y * vec.y + self.z * vec.z
+        return val
+
     def magnitude(self, ):
         """
-        The length of the vector.
-
         :return: float: the length of the vector
         """
         length = math.sqrt(self.x * self.x + self.y * self.y + self.z * self.z)
         return length
+
+    def squareMagnitude(self, ):
+        """
+        :return: float: the Squared length of the vector
+        """
+        length = self.x * self.x + self.y * self.y + self.z * self.z
+        return length
+
+    @staticmethod
+    def ones(scale=1):
+        return Vector3(scale, scale, scale)
+
+    @staticmethod
+    def zeros():
+        return Vector3(0, 0, 0)
 
     @staticmethod
     def lerp(vec_a, vec_b, t):
@@ -205,7 +230,7 @@ class Transform2D:
 
 
 class SpriteRenderer:
-    def __init__(self, sprite_name):
+    def __init__(self, sprite_name, smooth=True):
         """
         :param sprite_name: the name of the sprite
         """
@@ -220,7 +245,8 @@ class SpriteRenderer:
         self._sprite_text_id = glGenTextures(1)
 
         glBindTexture(GL_TEXTURE_2D, self._sprite_text_id)
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR)
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR if smooth else GL_NEAREST)
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR if smooth else GL_NEAREST)
         glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, self._sprite_width, self._sprite_height, 0,
                      GL_RGBA, GL_UNSIGNED_BYTE, self._sprite_data)
 
@@ -232,13 +258,11 @@ class SpriteRenderer:
     @property
     def size(self):
         """
-        the normalized right direction of the game object
-        :return: Vector3
+        :return: the width and the height of the sprite
         """
         return self._sprite_width / 100, self._sprite_height / 100
 
-    def render(self, x=0, y=0, mul=1, brightness=1, color=Vector3(1, 1, 1)):
-
+    def render(self, mul=1, brightness=1, color=Vector3(1, 1, 1)):
         """
             render the sprite at the origin.
         """
@@ -254,50 +278,23 @@ class SpriteRenderer:
 
         glBegin(GL_QUADS)
         glTexCoord2f(0, 0)
-        glVertex3f(x - 1 * rx, y - 1 * ry, 0)
+        glVertex3f(-rx, -ry, 0)
 
         glTexCoord2f(0, mul)
-        glVertex3f(x - 1 * rx, y + 1 * ry, 0)
+        glVertex3f(-rx, +ry, 0)
 
         glTexCoord2f(mul, mul)
-        glVertex3f(x + 1 * rx, y + 1 * ry, 0)
+        glVertex3f(+rx, +ry, 0)
 
         glTexCoord2f(mul, 0)
-        glVertex3f(x + 1 * rx, y - 1 * ry, 0)
+        glVertex3f(+rx, -ry, 0)
         glEnd()
 
         glDisable(GL_TEXTURE_2D)
 
 
-class Texture:
-    def __init__(self, sprite_name):
-        """
-        :param sprite_name: the name of the sprite
-        """
-        drawings_path = os.path.dirname(Drawings.__file__)
-        self._sprite_path = drawings_path + '\\' + sprite_name
-
-        self._sprite = pygame.image.load(self._sprite_path)
-
-        self._sprite_data = pygame.image.tostring(self._sprite, "RGBA", 1)
-
-        self.texture_width = self._sprite.get_width()
-        self.texture_height = self._sprite.get_height()
-        self.texture_id = glGenTextures(1)
-
-        glBindTexture(GL_TEXTURE_2D, self.texture_id)
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR)
-        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, self.texture_width, self.texture_height, 0,
-                     GL_RGBA, GL_UNSIGNED_BYTE, self._sprite_data)
-
-        del self._sprite, self._sprite_data
-
-    def __del__(self):
-        glDeleteTextures(1, self.texture_id)
-
-
 class Animation:
-    def __init__(self, sprite_name, size, speed):
+    def __init__(self, sprite_name, size, speed, smooth=True):
         """
         :param sprite_name: the name of the sprite
         """
@@ -314,7 +311,8 @@ class Animation:
         self.sprite_text_id = glGenTextures(1)
 
         glBindTexture(GL_TEXTURE_2D, self.sprite_text_id)
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR)
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR if smooth else GL_NEAREST)
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR if smooth else GL_NEAREST)
         glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, self.sprite_width, self.sprite_height, 0,
                      GL_RGBA, GL_UNSIGNED_BYTE, self.sprite_data)
 
@@ -366,6 +364,20 @@ class Animation:
         glDisable(GL_TEXTURE_2D)
 
 
+class PlainText:
+    def __init__(self, text, line_width=1):
+        self.text = text
+        self.line_width = line_width
+
+    def render(self, color=Vector3.zeros()):
+        glScale(0.001, 0.001, 0.001)
+        glLineWidth(self.line_width)
+        glColor3f(color.x, color.y, color.z)
+
+        for c in self.text.encode():
+            glutStrokeCharacter(GLUT_STROKE_ROMAN, c)
+
+
 class BoxCollider2D:
     def __init__(self, width, height, transform, collider_id, collider_tag='box'):
         self.width = width
@@ -378,19 +390,21 @@ class BoxCollider2D:
         Physics.addBox(self)
 
     def render(self):
-        x1 = self.start_pos_x()
-        y1 = self.start_pos_y()
-        x2 = self.end_pos_x()
-        y2 = self.end_pos_y()
+        x = self.width / 2
+        y = self.height / 2
+
+        glScale(1 / self.transform.scale.x,
+                1 / self.transform.scale.y,
+                1 / self.transform.scale.z)
 
         glColor3f(1, 1, 1)
         glLineWidth(1)
 
         glBegin(GL_LINE_LOOP)
-        glVertex3f(x1, y1, -1)
-        glVertex3f(x1, y2, -1)
-        glVertex3f(x2, y2, -1)
-        glVertex3f(x2, y1, -1)
+        glVertex3f(-x, -y, 0)
+        glVertex3f(-x, +y, 0)
+        glVertex3f(+x, +y, 0)
+        glVertex3f(+x, -y, 0)
         glEnd()
 
     def on_collision_trigger(self, method):
