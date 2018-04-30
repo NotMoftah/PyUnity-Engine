@@ -331,7 +331,7 @@ class Animation:
 
         return 0, step
 
-    def render(self, animate=True, brightness=1):
+    def render(self, animate=True, brightness=1, color=Vector3(1, 1, 1)):
 
         """
             render the sprite at the origin.
@@ -345,7 +345,7 @@ class Animation:
         ry = self.sprite_height / 100
         tx, ty = self.__frame_bounds(animate)
 
-        glColor3f(1 * brightness, 1 * brightness, 1 * brightness)
+        glColor3f(color.x * brightness, color.y * brightness, color.z * brightness)
 
         glBegin(GL_QUADS)
         glTexCoord2f(tx, 0)

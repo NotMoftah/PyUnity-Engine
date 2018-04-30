@@ -18,6 +18,7 @@ def start():
     DataBase.__LoadDataBase()
     EventManager.loadScripts()
     EventManager.castStart()
+    EventManager.updateDictionary()
     glutMainLoop()
 
 
