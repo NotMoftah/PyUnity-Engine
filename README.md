@@ -1,5 +1,5 @@
 # I'm busy with my exams right now, there'll be a proper documentation in the next week:
-# For now, Just run the ' Engine' Script in Kernel and it's fire up.
+# For now, Just run the ' Engine' Script in Kernel and it'll fire up.
 
 # GoEngine
 2D OpenGL Scripting Game Engine.
