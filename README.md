@@ -1,4 +1,4 @@
-# I'm busy with my exams right now, there'll be a proper documentation in the next week:
+# I'm busy with my exams right now, There'll be a proper documentation in the next week:
 # For now, Just run the ' Engine' Script in Kernel and it'll fire up.
 
 # GoEngine
@@ -19,4 +19,4 @@
  
 
 # Notes:
-    This game engine is pure OpenGL EXCEPT for the usage of pyGame to load images.
+    This game engine is pure OpenGL EXCEPT for the usage of PYGAME to load images.
